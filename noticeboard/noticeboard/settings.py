@@ -35,8 +35,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'frontend',
+    'posts',
+    'roles',
+    'permissions',
     'rest_framework',
+    'knox',
     'accounts',
+    'departments',
+    'categories'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
