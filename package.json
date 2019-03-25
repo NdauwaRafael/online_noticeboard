@@ -1,0 +1,55 @@
+{
+  "name": "noticeboard",
+  "version": "1.0.0",
+  "description": "An online noticeboard application developed using python and react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development ./noticeboard/frontend/src/index.js --output ./noticeboard/frontend/static/frontend/main.js",
+    "prod": "webpack --mode production ./noticeboard/frontend/src/index.js --output ./noticeboard/frontend/static/frontend/main.js",
+    "watch": "webpack --mode development ./noticeboard/frontend/src/index.js --output ./noticeboard/frontend/static/frontend/main.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NdauwaRafael/noticebaord_django.git"
+  },
+  "author": "Raphael Karanja <raphaelndauwa@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NdauwaRafael/noticebaord_django/issues"
+  },
+  "homepage": "https://github.com/NdauwaRafael/noticebaord_django#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-alert": "^5.4.0",
+    "react-alert-template-basic": "^1.0.0",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-transition-group": "^2.7.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-multi": "^0.1.12",
+    "redux-thunk": "^2.3.0"
+  }
+}
