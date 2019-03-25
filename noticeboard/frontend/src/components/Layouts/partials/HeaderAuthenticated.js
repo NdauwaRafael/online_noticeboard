@@ -47,18 +47,18 @@ export default ({ logoutUser, user }) =>
                 </a>
 
                 <div className="dropdown-menu" aria-labelledby="download">
-                    <a className="dropdown-item" target="_blank"
-                        href="#">Open in JSFiddle</a>
+                    <strong style={{opacity: .5}} className="dropdown-item"
+                        >Utility Links</strong>
                     <div className="dropdown-divider"> </div>
                     <a className="dropdown-item" href="#"
-                        download>bootstrap.min.css</a>
+                        >Add Categories</a>
                     <a className="dropdown-item" href="#"
-                        download>bootstrap.css</a>
+                        >View Categories</a>
                     <div className="dropdown-divider"> </div>
                     <a className="dropdown-item" href="#"
-                        download>_variables.scss</a>
+                        >Add Roles</a>
                     <a className="dropdown-item" href="#"
-                        download>_bootswatch.scss</a>
+                        >View Roles</a>
                 </div>
             </li>
         </ul>
