@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import TextInput from '../../common/form/Input';
-import { Login } from '../Login';
-import { Link } from 'react-router-dom';
+import Textarea from '../../common/form/Textarea';
+import {Link} from 'react-router-dom';
 
 
-function RegisterForm({ user: { username, first_name, last_name, email, password, cpassword }, onChange, onSave, errors }) {
+function RegisterForm({user: {username, first_name, last_name, email, password, cpassword, bio, registration_no}, onChange, onSave, errors}) {
     return (
         <Fragment>
             <form onSubmit={onSave}>
@@ -14,21 +14,21 @@ function RegisterForm({ user: { username, first_name, last_name, email, password
                     label="Username"
                     value={username}
                     error={errors.username}
-                    onChange={onChange} />
+                    onChange={onChange}/>
 
                 <TextInput
                     name='first_name'
                     label="First Name"
                     value={first_name}
                     error={errors.first_name}
-                    onChange={onChange} />
+                    onChange={onChange}/>
 
                 <TextInput
                     name='last_name'
                     label="Last Name"
                     value={last_name}
                     error={errors.last_name}
-                    onChange={onChange} />
+                    onChange={onChange}/>
 
                 <TextInput
                     type="email"
@@ -36,7 +36,22 @@ function RegisterForm({ user: { username, first_name, last_name, email, password
                     label="Email"
                     value={email}
                     error={errors.email}
-                    onChange={onChange} />
+                    onChange={onChange}/>
+
+                <TextInput
+                    name='registration_no'
+                    label="Registration Number"
+                    value={registration_no}
+                    error={errors.registration_no}
+                    onChange={onChange}/>
+                <Textarea
+                    name='bio'
+                    label='Bio(Optional)'
+                    value={bio}
+                    erro={errors.bio}
+                    onChange={onChange}
+                    rows='5'
+                />
 
                 <TextInput
                     type='password'
@@ -44,7 +59,7 @@ function RegisterForm({ user: { username, first_name, last_name, email, password
                     label="Password"
                     value={password}
                     error={errors.password}
-                    onChange={onChange} />
+                    onChange={onChange}/>
 
                 <TextInput
                     type="password"
@@ -52,10 +67,11 @@ function RegisterForm({ user: { username, first_name, last_name, email, password
                     label="Confirm Password"
                     value={cpassword}
                     error={errors.cpassword}
-                    onChange={onChange} />
+                    onChange={onChange}/>
 
                 <button type="submit" className="btn btn-success">Submit Request</button>
-                <Link to="/login" className="btn btn-outline-secondary btn-sm" style={{ marginLeft: 20 }}>Go to Login</Link>
+                <Link to="/login" className="btn btn-outline-secondary btn-sm" style={{marginLeft: 20}}>Go to
+                    Login</Link>
             </form>
         </Fragment>
     )

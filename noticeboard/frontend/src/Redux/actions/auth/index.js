@@ -84,7 +84,7 @@ export const loginUser = (username, password) => dispatch => {
                 return dispatch([
                     getErrors('Login failed: ' + error.response.data.non_field_errors.join()),
                     loginFailed(error.response.data),
-                    ])
+                ])
             } else {
                 return dispatch([
                     loginFailed(error.response.data),
@@ -131,14 +131,14 @@ export const registerUserFailed = (errors) => {
     }
 };
 
-export const registerUser = ({username, email, first_name, last_name, password}) => dispatch => {
+export const registerUser = ({username, email, first_name, last_name, password, bio, registration_no, role_id, department_id}) => dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         }
     };
 
-    let user = JSON.stringify({username, email, first_name, last_name, password});
+    let user = JSON.stringify({username, email, first_name, last_name, password, bio, registration_no, role_id, department_id});
     authApi.registerUserApi(user, config)
         .then(resp => {
             return dispatch([

@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, {Component, Fragment} from 'react'
 import RegisterForm from './partials/RegisterForm';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { registerUser } from '../../Redux/actions/auth';
-import { Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {registerUser} from '../../Redux/actions/auth';
+import {Redirect} from 'react-router-dom';
 
 export class Register extends Component {
     constructor(props) {
@@ -16,7 +16,11 @@ export class Register extends Component {
                 last_name: '',
                 email: '',
                 password: '',
-                cpassword: ''
+                cpassword: '',
+                bio: '',
+                registration_no: '',
+                role_id: '',
+                department_id: ''
             },
             errors: {
                 username: '',
@@ -24,14 +28,19 @@ export class Register extends Component {
                 last_name: '',
                 email: '',
                 password: '',
-                cpassword: ''
+                cpassword: '',
+                bio: '',
+                registration_no: '',
+                role_id: '',
+                department_id: ''
             }
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSave = this.onSave.bind(this);
     }
+
     componentDidUpdate(prevProps) {
-        const { registrationErrors } = this.props;
+        const {registrationErrors} = this.props;
         if (prevProps.registrationErrors !== registrationErrors) {
             if (registrationErrors.username || registrationErrors.email || registrationErrors.password || registrationErrors.first_name || registrationErrors.last_name) {
                 this.setState({
@@ -40,12 +49,13 @@ export class Register extends Component {
             }
         }
     }
+
     handleChange(event) {
         let field = event.target.name;
         let value = event.target.value;
         let user = Object.assign({}, this.state.user);
         user[field] = value;
-        return this.setState({ user });
+        return this.setState({user});
     };
 
     emailIsValid(email) {
@@ -54,7 +64,7 @@ export class Register extends Component {
     }
 
     userIsValid() {
-        let { user, errors } = this.state;
+        let {user, errors} = this.state;
         let isValid = true;
 
         if (user.username.length < 3) {
@@ -95,7 +105,7 @@ export class Register extends Component {
             errors.last_name = '';
         }
 
-        this.setState({ errors });
+        this.setState({errors});
 
         return isValid;
     }
@@ -109,10 +119,10 @@ export class Register extends Component {
     }
 
     render() {
-        let { user, errors } = this.state;
-        let { auth } = this.props;
+        let {user, errors} = this.state;
+        let {auth} = this.props;
         if (auth.isAuthenticated) {
-            return <Redirect to="/" />
+            return <Redirect to="/"/>
         }
         return (
             <Fragment>
@@ -122,11 +132,11 @@ export class Register extends Component {
                     onChange={this.handleChange}
                     onSave={this.onSave}
                 />
-            </Fragment>
-        )
+            </Fragment>)
     }
 }
-const mapStateToProps = ({ auth: { registrationErrors }, auth }) => {
+
+const mapStateToProps = ({auth: {registrationErrors}, auth}) => {
     return {
         auth,
         registrationErrors
@@ -137,4 +147,4 @@ const mapDispatchToProps = (dispatch) => {
         registerUser: bindActionCreators(registerUser, dispatch)
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Register) 
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
