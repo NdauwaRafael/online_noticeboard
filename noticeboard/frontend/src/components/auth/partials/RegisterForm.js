@@ -44,13 +44,14 @@ function RegisterForm({user: {username, first_name, last_name, email, password, 
                     value={registration_no}
                     error={errors.registration_no}
                     onChange={onChange}/>
+
                 <Textarea
                     name='bio'
                     label='Bio(Optional)'
                     value={bio}
                     erro={errors.bio}
                     onChange={onChange}
-                    rows='5'
+                    rows='3'
                 />
 
                 <TextInput
