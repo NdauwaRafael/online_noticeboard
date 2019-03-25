@@ -1,12 +1,13 @@
 from posts.models import Post
 from rest_framework import viewsets, permissions
 from .serializers import PostSerializer
-
+from accounts.permissions import UserIsStudentLeader
 
 class PostViewSet(viewsets.ModelViewSet):
     # queryset = Post.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.IsAuthenticated,
+        UserIsStudentLeader
     ]
 
     serializer_class = PostSerializer

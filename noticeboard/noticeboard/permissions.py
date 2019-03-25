@@ -10,5 +10,5 @@ class UserIsStudentLeader(permissions.BasePermission):
     def has_permission(self, request, view):
         role_id = request.user.role_id
         role = Role.objects.extra(where=['id=%s'], params=[role_id])
-        # print(role)
+        print(role)
         return not role
