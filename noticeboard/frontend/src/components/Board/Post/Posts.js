@@ -22,7 +22,7 @@ class Posts extends Component {
 
         return (
             <Fragment>
-                <h1>Posts </h1>
+                <h1>Public Posts </h1>
                 <table className="table">
                     <thead className="thead-dark">
                         <tr>
