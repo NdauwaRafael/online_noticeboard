@@ -38,7 +38,7 @@ export default ({ logoutUser, user }) =>
             </li>
 
             <li className="nav-item">
-                <a className="nav-link" href="#">Blog</a>
+                <Link to="/addpost" className="nav-link" >Add a post</Link>
             </li>
 
             <li className="nav-item dropdown">

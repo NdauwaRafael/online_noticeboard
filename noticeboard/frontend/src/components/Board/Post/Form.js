@@ -5,6 +5,7 @@ import SelectInput from '../../common/form/Select'
 import {connect} from 'react-redux';
 import {addPost} from '../../../Redux/actions/posts';
 import {bindActionCreators} from 'redux';
+import {Link} from "react-router-dom";
 
 class PostForm extends Component {
     constructor(props) {
@@ -105,6 +106,12 @@ class PostForm extends Component {
 
         return (
             <Fragment>
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                    <li className="breadcrumb-item active">Add Post</li>
+                </ol>
+
+                <h1>Add Post</h1>
                 <form onSubmit={this.onSave}>
                     <TextInput name='title'
                                label="Post Title"

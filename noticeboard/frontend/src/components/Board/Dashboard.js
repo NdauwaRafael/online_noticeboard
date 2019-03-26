@@ -4,7 +4,9 @@ class Dashboard extends Component {
     render() {
         return (
             <Fragment>
-                <h1>Bord Dashboard</h1>
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item active">Noticeboard Dashboard</li>
+                </ol>
                 <Posts />
             </Fragment>
         )

@@ -9,16 +9,16 @@ const AdminRoute = ({component: Component, auth, ...rest}) => (
                    return <h2>Loading....</h2>
                } else if (!auth.isAuthenticated) {
                    return <Redirect to="/login"/>
-               } else if (auth.user.role !== 'Administrator' || auth.user.role !== 'HOD' || auth.user.role !== 'student_leader') {
-                   return <Redirect to="/" />
-               } else {
+               } else if (auth.user.role === 'Administrator' || auth.user.role === 'HOD' || auth.user.role === 'student_leader') {
                    return <Component {...props} />
+               } else {
+                   return <Redirect to="/" />
                }
 
            }}/>
-)
+);
 
 const mapStateToProps = ({auth}) => ({
     auth
-})
+});
 export default connect(mapStateToProps)(AdminRoute);
