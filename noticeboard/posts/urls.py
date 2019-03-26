@@ -3,6 +3,6 @@ from .api import PostViewSet, DepartmentPostViewSet
 
 
 router = routers.DefaultRouter()
-
-router.register('api/posts', DepartmentPostViewSet, 'posts')
+router.register('api/posts', PostViewSet, 'posts')
+router.register('api/posts/department', DepartmentPostViewSet, 'posts')
 urlpatterns = router.urls

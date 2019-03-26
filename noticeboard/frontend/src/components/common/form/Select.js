@@ -6,7 +6,6 @@ class Select extends Component {
     render() {
         const { name, value, label, error, onChange, options, defaultOption } = this.props;
         let validatorClass = '';
-        let validatorClass = '';
         let parentValidator = '';
         let errorMessageValidator = ''
         if (error.length > 0) {

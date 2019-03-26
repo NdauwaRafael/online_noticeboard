@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
 import TextInput from '../../common/form/Input';
 import Textarea from '../../common/form/Textarea';
-import { connect } from 'react-redux';
-import { addPost } from '../../../Redux/actions/posts';
-import { bindActionCreators } from 'redux';
+import SelectInput from '../../common/form/Select'
+import {connect} from 'react-redux';
+import {addPost} from '../../../Redux/actions/posts';
+import {bindActionCreators} from 'redux';
 
 class PostForm extends Component {
     constructor(props) {
@@ -23,12 +24,13 @@ class PostForm extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { errors, posts } = this.props;
+        const {errors, posts} = this.props;
         if (prevProps.errors !== errors) {
             this.setState({
                 errors
             })
-        };
+        }
+        ;
         if (prevProps.posts !== posts) this.setState({
             title: '',
             description: ''
@@ -38,11 +40,11 @@ class PostForm extends Component {
     handleChange(event) {
         let field = event.target.name;
         let value = event.target.value;
-        return this.setState({ [field]: value });
+        return this.setState({[field]: value});
     };
 
     postIsValid() {
-        let { title, description, errors } = this.state;
+        let {title, description, errors} = this.state;
         let isValid = true;
 
         if (title.length <= 3) {
@@ -60,7 +62,7 @@ class PostForm extends Component {
         }
 
 
-        this.setState({ errors });
+        this.setState({errors});
 
         return isValid;
     }
@@ -79,13 +81,42 @@ class PostForm extends Component {
     }
 
     render() {
-        const { title, description, errors } = this.state
+        const {title, description, errors, category} = this.state;
+
+        const categoryOptions = [
+            {
+                value: 'public',
+                text: 'Public Posts'
+            },
+            {
+                value: 'departmental',
+                text: 'Department Posts'
+            }];
+
         return (
             <Fragment>
                 <form onSubmit={this.onSave}>
-                    <TextInput name='title' label="Post Title" value={title} error={errors.title} onChange={this.handleChange} />
+                    <TextInput name='title'
+                               label="Post Title"
+                               value={title}
+                               error={errors.title}
+                               onChange={this.handleChange}/>
+                               
+                    <SelectInput
+                        name='category'
+                        label="Post Category"
+                        value={category}
+                        error={errors.category}
+                        options={categoryOptions}
+                        defaultOption="Select a Category"
+                        onChange={this.handleChange}/>
 
-                    <Textarea name="description" label="Post Description" value={description} error={errors.description} onChange={this.handleChange} />
+                    <Textarea name="description"
+                              label="Post Description"
+                              value={description}
+                              error={errors.description}
+                              onChange={this.handleChange}/>
+
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
 
@@ -100,7 +131,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = ({ posts: { errors }, posts }) => {
+const mapStateToProps = ({posts: {errors}, posts}) => {
     return {
         errors,
         posts
