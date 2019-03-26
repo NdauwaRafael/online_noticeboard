@@ -19,17 +19,21 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-class DeparmentPost(viewsets.ModelViewSet):
-    # permission_classes = [
-    #     permissions.IsAuthenticated,
-    #     UserIsStudentLeader
-    # ]
-    permission_classes_by_action = {'get_queryset': [permissions.IsAuthenticated],
+class DepartmentPostViewSet(viewsets.ModelViewSet):
+
+    permission_classes_by_action = {'get_queryset': [UserIsStudentLeader],
                                     'perform_create': [UserIsHOD]}
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        return self.request.posts.all()
+        return self.request.user.posts.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [UserIsHOD]
+        return [permission() for permission in permission_classes]
