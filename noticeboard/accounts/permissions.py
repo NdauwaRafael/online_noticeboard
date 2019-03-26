@@ -12,12 +12,10 @@ class UserIsStudentLeader(permissions.BasePermission):
 
     def has_permission(self, request, view):
         user = UserSerializer(request.user)
-        role_id = user.data['role_id']
-        role = Role.objects.filter(id=role_id)
-        # print(role.role)
-        return True
-        # if role.data['role'] is not 'Administrator':
-        #     return False
-        # else:
-        #     return True
+        role = user.data['role']
+        print(role)
+        if role == 'Administrator':
+            return True
+        else:
+            return False
 
