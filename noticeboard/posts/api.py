@@ -1,13 +1,11 @@
 from rest_framework import viewsets, permissions
 from .serializers import PostSerializer
 from .models import Post
-from accounts.permissions import UserIsStudentLeader, UserIsHOD, UserIsAdministrator, CanPublishPublic
+from accounts.permissions import UserIsStudentLeader, UserIsHOD, UserIsAdministrator, CanPublishPublic, IsOwnerOrReadOnly
 
 
 # Public posts
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes_by_action = {'get_queryset': [UserIsStudentLeader],
-                                    'perform_create': [UserIsHOD]}
 
     serializer_class = PostSerializer
 
@@ -21,14 +19,12 @@ class PostViewSet(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             permission_classes = [permissions.IsAuthenticated]
         else:
-            permission_classes = [CanPublishPublic]
+            permission_classes = [CanPublishPublic, IsOwnerOrReadOnly]
         return [permission() for permission in permission_classes]
 
 
 # Departmental posts
 class DepartmentPostViewSet(viewsets.ModelViewSet):
-    permission_classes_by_action = {'get_queryset': [permissions.IsAuthenticated],
-                                    'perform_create': [UserIsHOD]}
     serializer_class = PostSerializer
 
     def get_queryset(self):
@@ -41,5 +37,5 @@ class DepartmentPostViewSet(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             permission_classes = [permissions.IsAuthenticated]
         else:
-            permission_classes = [UserIsHOD]
+            permission_classes = [UserIsHOD, IsOwnerOrReadOnly]
         return [permission() for permission in permission_classes]
