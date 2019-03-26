@@ -52,10 +52,14 @@ class UserIsHOD(permissions.BasePermission):
             return False
 
 
-class BelongsToDepartment(permissions.BasePermission):
-    serializer_class = DepartmentSerializer
+class CanPublishPublic(permissions.BasePermission):
+    serializer_class = RoleSerializer
 
     def has_permission(self, request, view):
         user = UserSerializer(request.user)
-        department_id = user.data['department']
-        print(department_id)
+        role = user.data['role']
+
+        if role == 'HOD' or role == 'student_leader' or role == 'Administrator':
+            return True
+        else:
+            return False
