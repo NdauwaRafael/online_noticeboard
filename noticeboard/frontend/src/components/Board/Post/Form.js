@@ -13,7 +13,7 @@ class PostForm extends Component {
         this.state = {
             title: '',
             description: '',
-            category: ''
+            category: '',
             errors: {
                 title: '',
                 description: '',
