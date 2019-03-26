@@ -6,7 +6,7 @@ class PostViewSet(viewsets.ModelViewSet):
     # queryset = Post.objects.all()
     permission_classes = [
         permissions.IsAuthenticated,
-        UserIsStudentLeader
+        # UserIsStudentLeader
     ]
 
     serializer_class = PostSerializer

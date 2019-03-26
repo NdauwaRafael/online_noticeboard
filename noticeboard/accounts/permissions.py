@@ -14,8 +14,23 @@ class UserIsStudentLeader(permissions.BasePermission):
         user = UserSerializer(request.user)
         role = user.data['role']
         print(role)
-        if role == 'Administrator':
+        if role == 'student_leader':
             return True
         else:
             return False
 
+
+class UserIsAdministrator(permissions.BasePermission):
+    """
+    Global permission check for user role.
+    """
+    serializer_class = RoleSerializer
+
+    def has_permission(self, request, view):
+        user = UserSerializer(request.user)
+        role = user.data['role']
+        print(role)
+        if role == 'Administrator':
+            return True
+        else:
+            return False
