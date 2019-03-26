@@ -66,7 +66,7 @@ export default ({ logoutUser, user }) =>
         <ul className="nav navbar-nav ml-auto">
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                    id="download">{user ? `${user.username} Account` : 'User Account'} <span className="caret"> </span></a>
+                    id="download">{user ? `${user.first_name} ${user.last_name}` : 'User Account'} <span className="caret"> </span></a>
                 <div className="dropdown-menu" aria-labelledby="download">
                     <a className="dropdown-item"
                         href="#">Profile</a>
