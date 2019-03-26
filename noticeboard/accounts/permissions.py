@@ -1,7 +1,7 @@
 from rest_framework import permissions
-from roles.models import Role
 from roles.serializers import RoleSerializer
 from accounts.serializers import UserSerializer
+from departments.serializers import DepartmentSerializer
 
 
 class UserIsStudentLeader(permissions.BasePermission):
@@ -13,7 +13,7 @@ class UserIsStudentLeader(permissions.BasePermission):
     def has_permission(self, request, view):
         user = UserSerializer(request.user)
         role = user.data['role']
-        print(role)
+
         if role == 'student_leader':
             return True
         else:
@@ -29,7 +29,7 @@ class UserIsAdministrator(permissions.BasePermission):
     def has_permission(self, request, view):
         user = UserSerializer(request.user)
         role = user.data['role']
-        print(role)
+
         if role == 'Administrator':
             return True
         else:
@@ -45,8 +45,17 @@ class UserIsHOD(permissions.BasePermission):
     def has_permission(self, request, view):
         user = UserSerializer(request.user)
         role = user.data['role']
-        print(role)
+
         if role == 'HOD':
             return True
         else:
             return False
+
+
+class BelongsToDepartment(permissions.BasePermission):
+    serializer_class = DepartmentSerializer
+
+    def has_permission(self, request, view):
+        user = UserSerializer(request.user)
+        department_id = user.data['department']
+        print(department_id)
