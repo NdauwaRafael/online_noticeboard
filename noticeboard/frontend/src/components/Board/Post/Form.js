@@ -13,11 +13,13 @@ class PostForm extends Component {
         this.state = {
             title: '',
             description: '',
+            category: ''
             errors: {
                 title: '',
-                description: ''
+                description: '',
+                category: ''
             }
-        }
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSave = this.onSave.bind(this);
@@ -44,7 +46,7 @@ class PostForm extends Component {
     };
 
     postIsValid() {
-        let {title, description, errors} = this.state;
+        let {title, description,category, errors} = this.state;
         let isValid = true;
 
         if (title.length <= 3) {
@@ -52,6 +54,13 @@ class PostForm extends Component {
             isValid = false;
         } else {
             errors.title = ''
+        }
+
+        if (category.length <= 3) {
+            errors.category = 'Post category must not be empty';
+            isValid = false;
+        } else {
+            errors.category = ''
         }
 
         if (description.length <= 20) {
@@ -74,8 +83,9 @@ class PostForm extends Component {
         }
         let post = {
             title: this.state.title,
+            category: this.state.category,
             description: this.state.description
-        }
+        };
 
         this.props.savePost(post);
     }
@@ -101,7 +111,7 @@ class PostForm extends Component {
                                value={title}
                                error={errors.title}
                                onChange={this.handleChange}/>
-                               
+
                     <SelectInput
                         name='category'
                         label="Post Category"
