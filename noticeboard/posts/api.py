@@ -1,4 +1,3 @@
-from posts.models import Post
 from rest_framework import viewsets, permissions
 from .serializers import PostSerializer
 from accounts.permissions import UserIsStudentLeader

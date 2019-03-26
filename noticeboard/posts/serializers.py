@@ -3,6 +3,8 @@ from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    owner = serializers.StringRelatedField()
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ('description', 'title', 'owner')

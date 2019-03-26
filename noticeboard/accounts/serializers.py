@@ -1,20 +1,20 @@
 from rest_framework import serializers
-from rest_framework.relations import PrimaryKeyRelatedField
-from roles.models import Role
-from departments.models import Department
 from .models import User
 from django.contrib.auth import authenticate
+# from posts.serializers import PostSerializer
 
 
 # User Serializer
-class UserSerializer(serializers.ModelSerializer):
-    department_id = PrimaryKeyRelatedField(queryset=Department.objects.all())
-    role_id = PrimaryKeyRelatedField(queryset=Role.objects.all())
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    department = serializers.ReadOnlyField(source='department_id.id')
+    role = serializers.ReadOnlyField(source='role_id.role')
+    # posts = PostSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
         fields = (
-            'id', 'username', 'email', 'first_name', 'last_name', 'registration_no', 'bio', 'department_id', 'role_id')
+            'id', 'username', 'email', 'first_name', 'last_name',
+            'registration_no', 'bio', 'department', 'role')
 
 
 # Register Serializer

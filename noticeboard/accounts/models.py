@@ -8,7 +8,7 @@ from roles.models import Role
 class User(AbstractUser):
     registration_no = models.CharField(max_length=100, unique=True)
     department_id = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
-    role_id = models.ForeignKey(Role, on_delete=models.CASCADE, null=True)
+    role_id = models.ForeignKey(Role, on_delete=models.CASCADE, related_name='user_role', null=True)
     bio = models.CharField(max_length=400, null=True)
 
 
