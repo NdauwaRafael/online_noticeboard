@@ -1361,6 +1361,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _con
 
 /***/ }),
 
+/***/ "./noticeboard/frontend/src/Redux/reducers/departments/index.js":
+/*!**********************************************************************!*\
+  !*** ./noticeboard/frontend/src/Redux/reducers/departments/index.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _constants_actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constants/actionTypes */ \"./noticeboard/frontend/src/Redux/constants/actionTypes.js\");\n\nconst initialState = {\n  departments: []\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = ((state = initialState, action) => {\n  switch (action.type) {\n    case _constants_actionTypes__WEBPACK_IMPORTED_MODULE_0__[\"GET_DEPARTMENTS_SUCCESS\"]:\n      return { ...state,\n        departments: action.departments\n      };\n  }\n});\n\n//# sourceURL=webpack:///./noticeboard/frontend/src/Redux/reducers/departments/index.js?");
+
+/***/ }),
+
 /***/ "./noticeboard/frontend/src/Redux/reducers/errors/index.js":
 /*!*****************************************************************!*\
   !*** ./noticeboard/frontend/src/Redux/reducers/errors/index.js ***!
@@ -1381,7 +1393,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _con
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _posts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./posts */ \"./noticeboard/frontend/src/Redux/reducers/posts/index.js\");\n/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors */ \"./noticeboard/frontend/src/Redux/reducers/errors/index.js\");\n/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages */ \"./noticeboard/frontend/src/Redux/reducers/messages/index.js\");\n/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth */ \"./noticeboard/frontend/src/Redux/reducers/auth/index.js\");\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  posts: _posts__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  errors: _errors__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\n  messages: _messages__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n  auth: _auth__WEBPACK_IMPORTED_MODULE_4__[\"default\"]\n}));\n\n//# sourceURL=webpack:///./noticeboard/frontend/src/Redux/reducers/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _posts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./posts */ \"./noticeboard/frontend/src/Redux/reducers/posts/index.js\");\n/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors */ \"./noticeboard/frontend/src/Redux/reducers/errors/index.js\");\n/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages */ \"./noticeboard/frontend/src/Redux/reducers/messages/index.js\");\n/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth */ \"./noticeboard/frontend/src/Redux/reducers/auth/index.js\");\n/* harmony import */ var _departments__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./departments */ \"./noticeboard/frontend/src/Redux/reducers/departments/index.js\");\n\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  posts: _posts__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  errors: _errors__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\n  messages: _messages__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n  auth: _auth__WEBPACK_IMPORTED_MODULE_4__[\"default\"],\n  departments: _departments__WEBPACK_IMPORTED_MODULE_5__[\"default\"]\n}));\n\n//# sourceURL=webpack:///./noticeboard/frontend/src/Redux/reducers/index.js?");
 
 /***/ }),
 
