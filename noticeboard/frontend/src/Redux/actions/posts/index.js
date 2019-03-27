@@ -61,8 +61,8 @@ export const getPostsFailed = (resp) => {
     }
 }
 
-export const getAllPosts = () => (dispatch, getState) => {
-    postApi.getPosts(tokenConfig(getState))
+export const getAllPosts = (category) => (dispatch, getState) => {
+    postApi.getPosts(category, tokenConfig(getState))
         .then(resp => {
             return dispatch(getPostsSuccess(resp.data));
         })
@@ -94,8 +94,8 @@ export const deletePostFailed = (resp) => {
     }
 }
 
-export const deletePost = (id) => (dispatch, getState) => {
-    postApi.DELETE_POST(id, tokenConfig(getState))
+export const deletePost = (data) => (dispatch, getState) => {
+    postApi.DELETE_POST(data, tokenConfig(getState))
         .then(resp => {
             return dispatch([
                 deletePostSuccess(id),

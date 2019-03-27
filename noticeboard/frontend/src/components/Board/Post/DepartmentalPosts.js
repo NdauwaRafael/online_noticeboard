@@ -13,7 +13,11 @@ class Posts extends Component {
     }
 
     deletePost(id) {
-        this.props.deleteThisPost(id)
+        let data = {
+            id,
+            category: 'departmental'
+        };
+        this.props.deleteThisPost(data)
     }
 
     render() {

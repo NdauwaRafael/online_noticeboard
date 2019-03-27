@@ -23,14 +23,22 @@ import axios from 'axios';
 
 
 
-export const addPostApi = async (postData, config) => {
-    return axios.post('api/posts/', postData, config);
-}
-
-export const getPosts = async (config) => {
-    return axios.get('api/posts', config)
+export const addPostApi = async (post, config) => {
+return axios.post('api/posts/', post, config);
 };
 
-export const DELETE_POST = async (postId, config) => {
-    return axios.delete('api/posts/' + postId, config)
-}
+export const getPosts = async (category, config) => {
+    if(category === 'public'){
+        return axios.get('api/posts', config)
+    }else{
+        return axios.get('api/posts', config)
+    }
+};
+
+export const DELETE_POST = async ({id, category}, config) => {
+    if(category === 'public'){
+
+    }else{
+        return axios.delete('api/posts/' + id, config)
+    }
+};
