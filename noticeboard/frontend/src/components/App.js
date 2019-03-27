@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import store from '../Redux';
 import Alerts from './Layouts/Alerts';
 import AppRoutes from '../router';
-import { loadUser } from '../Redux/actions/auth'
+import { loadUser } from '../Redux/actions/auth';
+import {getDepartments} from '../Redux/actions/departments'
 //ALERTS
 import { transitions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
@@ -19,7 +20,8 @@ const alertOptions = {
 
 class App extends Component {
     componentDidMount() {
-        store.dispatch(loadUser())
+        store.dispatch(loadUser());
+        store.dispatch(getDepartments());
     }
     render() {
         return (
