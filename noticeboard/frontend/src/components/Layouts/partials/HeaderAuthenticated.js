@@ -13,10 +13,10 @@ export default ({logoutUser, user, auth: {canAddPost}, Fragment}) =>
                     <strong style={{opacity: .5}} className="dropdown-item"
                     >Posts Categories</strong>
                     <div className="dropdown-divider"/>
-                    <a className="dropdown-item" href="#"
-                    >Public Posts</a>
-                    <a className="dropdown-item" href="#"
-                    >Departmental Posts</a>
+                    <Link to="/posts/public" className="dropdown-item"
+                    >Public Posts</Link>
+                    <Link to="/posts/departmental" className="dropdown-item"
+                    >Departmental Posts</Link>
                     <div className="dropdown-divider"/>
                     <a className="dropdown-item" href="#"
                     >Other Posts</a>
