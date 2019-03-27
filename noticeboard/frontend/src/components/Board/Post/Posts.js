@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getPosts } from '../../../Redux/actions/posts';
 import { bindActionCreators } from 'redux';
 import { getAllPosts, deletePost } from '../../../Redux/actions/posts/index';
-
+import Posts from './partials/post'
 class Posts extends Component {
     constructor(props) {
         super(props)
@@ -18,43 +18,18 @@ class Posts extends Component {
     }
 
     render() {
-        const { posts } = this.props.posts;
+        const { posts, auth } = this.props.posts;
 
         return (
             <Fragment>
                 <h1>Public Posts </h1>
-                <table className="table">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            posts.map((post, index) => (
-                                <tr key={post.id}>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{post.title}</td>
-                                    <td>{post.description}</td>
-                                    <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <button type="button" style={{ marginRight: 20 }} className="btn btn-outline-success">View</button>
-                                        <button type="button" className="btn btn-outline-danger" onClick={() => this.deletePost(post.id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-
-                    </tbody>
-                </table>
+                <Posts posts={posts} auth={auth} />
             </Fragment>
         )
     }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ posts, auth }) => {
     return {
         posts
     }
