@@ -15,34 +15,60 @@ const initialState = {
     isLoading: false,
     user: null,
     authError: {},
-    registrationErrors: {}
+    registrationErrors: {},
+    canAddPost: false
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case USER_LOADING:
-            return { ...state, isLoading: true };
+            return {...state, isLoading: true};
         case USER_LOADED:
-            return { ...state, isLoading: false, isAuthenticated: true, user: action.user };
+            let userCanPost = false;
+            if (action.user.role === 'Administrator' || action.user.role === 'HOD' || action.user.role === 'student_leader') {
+                userCanPost = true;
+            }
+            return {...state, isLoading: false, isAuthenticated: true, user: action.user, canAddPost: userCanPost };
         case AUTH_ERROR:
         case LOGIN_FAILED:
             localStorage.removeItem('token')
-            return { ...state, isLoading: false, isAuthenticated: false, token: null, user: null, authError: action.error };
+            return {
+                ...state,
+                isLoading: false,
+                isAuthenticated: false,
+                token: null,
+                user: null,
+                authError: action.error,
+                canAddPost: false
+            };
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
+            let canPost = false;
+            if (action.user.role === 'Administrator' || action.user.role === 'HOD' || action.user.role === 'student_leader') {
+                canPost = true;
+            }
             return {
                 ...state,
                 isLoading: false,
                 isAuthenticated: true,
-                ...action.payload
+                ...action.payload,
+                canAddPost: canPost
             };
         case LOGOUT_SUCCESS:
             localStorage.removeItem('token')
-            return { ...state, isLoading: false, isAuthenticated: false, token: null, user: null }
+            return {...state, isLoading: false, isAuthenticated: false, token: null, user: null, canAddPost: false}
         case REGISTER_FAILED:
             localStorage.removeItem('token')
-            return { ...state, isLoading: false, isAuthenticated: false, token: null, user: null, registrationErrors: action.errors }
+            return {
+                ...state,
+                isLoading: false,
+                isAuthenticated: false,
+                token: null,
+                user: null,
+                registrationErrors: action.errors,
+                canAddPost: false
+            };
 
         default:
             return state;
