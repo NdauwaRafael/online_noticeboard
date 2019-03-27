@@ -80,7 +80,7 @@ export const loginUser = (username, password) => dispatch => {
             ])
         })
         .catch(error => {
-            if (error.response.data) {
+            if (error.response) {
                 return dispatch([
                     getErrors('Login failed!!'),
                     loginFailed(error.response.data),

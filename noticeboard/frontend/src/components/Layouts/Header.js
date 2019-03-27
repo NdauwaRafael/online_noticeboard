@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../../Redux/actions/auth';
 import HeaderGuest from './partials/HeaderGuest';
@@ -19,7 +19,10 @@ class Header extends Component {
                     </button>
 
                     {
-                        isAuthenticated ? <HeaderAuthenticated user={user} auth={auth} logoutUser={()=>this.props.logoutUser()} /> : <HeaderGuest />
+                        isAuthenticated ? <HeaderAuthenticated user={user}
+                                                               auth={auth}
+                                                               Fragment={Fragment}
+                                                               logoutUser={()=>this.props.logoutUser()} /> : <HeaderGuest />
                     }
 
                 </div>

@@ -1,71 +1,64 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default ({logoutUser, user, auth: {canAddPost}}) =>
+export default ({logoutUser, user, auth: {canAddPost}, Fragment}) =>
     <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav">
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                   id="themes">Categories <span className="caret"> </span></a>
-                <div className="dropdown-menu" aria-labelledby="themes">
-                    <a className="dropdown-item" href="#">Default</a>
-                    <div className="dropdown-divider" />
-                    <a className="dropdown-item" href="#">Cerulean</a>
-                    <a className="dropdown-item" href="#">Cosmo</a>
-                    <a className="dropdown-item" href="#">Cyborg</a>
-                    <a className="dropdown-item" href="#">Darkly</a>
-                    <a className="dropdown-item" href="#">Flatly</a>
-                    <a className="dropdown-item" href="#">Journal</a>
-                    <a className="dropdown-item" href="#">Litera</a>
-                    <a className="dropdown-item" href="#">Lumen</a>
-                    <a className="dropdown-item" href="#">Lux</a>
-                    <a className="dropdown-item" href="#">Materia</a>
-                    <a className="dropdown-item" href="#">Minty</a>
-                    <a className="dropdown-item" href="#">Pulse</a>
-                    <a className="dropdown-item" href="#">Sandstone</a>
-                    <a className="dropdown-item" href="#">Simplex</a>
-                    <a className="dropdown-item" href="#">Sketchy</a>
-                    <a className="dropdown-item" href="#">Slate</a>
-                    <a className="dropdown-item" href="#">Solar</a>
-                    <a className="dropdown-item" href="#">Spacelab</a>
-                    <a className="dropdown-item" href="#">Superhero</a>
-                    <a className="dropdown-item" href="#">United</a>
-                    <a className="dropdown-item" href="#">Yeti</a>
+                   id="download">Categories <span className="caret"> </span>
+                </a>
+
+                <div className="dropdown-menu" aria-labelledby="download">
+                    <strong style={{opacity: .5}} className="dropdown-item"
+                    >Posts Categories</strong>
+                    <div className="dropdown-divider"/>
+                    <a className="dropdown-item" href="#"
+                    >Public Posts</a>
+                    <a className="dropdown-item" href="#"
+                    >Departmental Posts</a>
+                    <div className="dropdown-divider"/>
+                    <a className="dropdown-item" href="#"
+                    >Other Posts</a>
                 </div>
             </li>
 
             <li className="nav-item">
                 <a className="nav-link" href="#">Help</a>
             </li>
+
             {
                 canAddPost ?
-                    <li className="nav-item">
-                        <Link to="/addpost" className="nav-link">Add a post</Link>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                           id="download">Admin Actions <span className="caret"> </span>
+                        </a>
+
+                        <div className="dropdown-menu" aria-labelledby="download">
+                            <strong style={{opacity: .5}} className="dropdown-item"
+                            >Utility Links</strong>
+                            <div className="dropdown-divider"/>
+                            <Link to="/addpost"
+                                  className="dropdown-item">Add a post</Link>
+                            {user.role === 'Administrator' ?
+                                <Fragment>
+                                    <div className="dropdown-divider"/>
+                                    <a className="dropdown-item" href="#"
+                                    >Add Users</a>
+                                    <a className="dropdown-item" href="#"
+                                    >View Users</a>
+                                    <div className="dropdown-divider"/>
+                                    <a className="dropdown-item" href="#"
+                                    >Manage Users</a>
+                                </Fragment>
+
+                                : null}
+
+                        </div>
                     </li>
                     : null
             }
 
-
-            <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                   id="download">Sketchy <span className="caret"> </span>
-                </a>
-
-                <div className="dropdown-menu" aria-labelledby="download">
-                    <strong style={{opacity: .5}} className="dropdown-item"
-                    >Utility Links</strong>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#"
-                    >Add Categories</a>
-                    <a className="dropdown-item" href="#"
-                    >View Categories</a>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#"
-                    >Add Roles</a>
-                    <a className="dropdown-item" href="#"
-                    >View Roles</a>
-                </div>
-            </li>
         </ul>
 
         <ul className="nav navbar-nav ml-auto">
@@ -76,7 +69,7 @@ export default ({logoutUser, user, auth: {canAddPost}}) =>
                 <div className="dropdown-menu" aria-labelledby="download">
                     <a className="dropdown-item"
                        href="#">Profile</a>
-                    <div className="dropdown-divider"></div>
+                    <div className="dropdown-divider"/>
                     <button className="dropdown-item"
                     >Help
                     </button>
