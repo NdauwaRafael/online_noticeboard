@@ -21,7 +21,7 @@ const alertOptions = {
 class App extends Component {
     componentDidMount() {
         store.dispatch(loadUser());
-        store.dispatch(getDepartments());
+        // store.dispatch(getDepartments());
     }
     render() {
         return (
