@@ -17,7 +17,7 @@ export const addPostSuccess = (resp) => {
         type: ADD_POST_SUCCESS,
         post: resp
     }
-}
+};
 
 export const addPostFailed = (resp) => {
     return {
