@@ -31,7 +31,7 @@ export const getPosts = async (category, config) => {
     if(category === 'public'){
         return axios.get('api/posts', config)
     }else{
-        return axios.get('api/posts', config)
+        return axios.get('api/posts?category=public', config)
     }
 };
 

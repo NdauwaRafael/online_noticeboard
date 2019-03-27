@@ -13,7 +13,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Post.objects.all()
         category = self.request.query_params.get('category')
-        user_department = UserSerializer(self.request.user).department
+        user_department = UserSerializer(self.request.user).data['department']
         if category == 'departmental':
             return queryset.filter(category=category, department=user_department)
         else:

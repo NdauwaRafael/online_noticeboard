@@ -16,7 +16,7 @@ const alertOptions = {
     position: 'top right',
     offset: '70px',
     transition: transitions.FADE
-}
+};
 
 class App extends Component {
     componentDidMount() {
