@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-export default ({ logoutUser, user }) =>
+import {Link} from 'react-router-dom';
+
+export default ({logoutUser, user, auth: {canAddPost}}) =>
     <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav">
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                    id="themes">Categories <span className="caret"> </span></a>
+                   id="themes">Categories <span className="caret"> </span></a>
                 <div className="dropdown-menu" aria-labelledby="themes">
                     <a className="dropdown-item" href="#">Default</a>
-                    <div className="dropdown-divider"> </div>
+                    <div className="dropdown-divider" />
                     <a className="dropdown-item" href="#">Cerulean</a>
                     <a className="dropdown-item" href="#">Cosmo</a>
                     <a className="dropdown-item" href="#">Cyborg</a>
@@ -36,29 +37,33 @@ export default ({ logoutUser, user }) =>
             <li className="nav-item">
                 <a className="nav-link" href="#">Help</a>
             </li>
+            {
+                canAddPost ?
+                    <li className="nav-item">
+                        <Link to="/addpost" className="nav-link">Add a post</Link>
+                    </li>
+                    : null
+            }
 
-            <li className="nav-item">
-                <Link to="/addpost" className="nav-link" >Add a post</Link>
-            </li>
 
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                    id="download">Sketchy <span className="caret"> </span>
+                   id="download">Sketchy <span className="caret"> </span>
                 </a>
 
                 <div className="dropdown-menu" aria-labelledby="download">
                     <strong style={{opacity: .5}} className="dropdown-item"
-                        >Utility Links</strong>
-                    <div className="dropdown-divider"> </div>
+                    >Utility Links</strong>
+                    <div className="dropdown-divider"></div>
                     <a className="dropdown-item" href="#"
-                        >Add Categories</a>
+                    >Add Categories</a>
                     <a className="dropdown-item" href="#"
-                        >View Categories</a>
-                    <div className="dropdown-divider"> </div>
+                    >View Categories</a>
+                    <div className="dropdown-divider"></div>
                     <a className="dropdown-item" href="#"
-                        >Add Roles</a>
+                    >Add Roles</a>
                     <a className="dropdown-item" href="#"
-                        >View Roles</a>
+                    >View Roles</a>
                 </div>
             </li>
         </ul>
@@ -66,20 +71,25 @@ export default ({ logoutUser, user }) =>
         <ul className="nav navbar-nav ml-auto">
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                    id="download">{user ? `${user.first_name} ${user.last_name}` : 'User Account'} <span className="caret"> </span></a>
+                   id="download">{user ? `${user.first_name} ${user.last_name}` : 'User Account'} <span
+                    className="caret"> </span></a>
                 <div className="dropdown-menu" aria-labelledby="download">
                     <a className="dropdown-item"
-                        href="#">Profile</a>
-                    <div className="dropdown-divider"> </div>
+                       href="#">Profile</a>
+                    <div className="dropdown-divider"></div>
                     <button className="dropdown-item"
-                        >Help</button>
+                    >Help
+                    </button>
                     <button className="dropdown-item"
-                        >FAQS</button>
-                    <div className="dropdown-divider"> </div>
+                    >FAQS
+                    </button>
+                    <div className="dropdown-divider"></div>
                     <button className="dropdown-item"
-                        >Account Terms</button>
+                    >Account Terms
+                    </button>
                     <button className="dropdown-item" onClick={logoutUser}
-                        >Account Logout</button>
+                    >Account Logout
+                    </button>
                 </div>
             </li>
         </ul>

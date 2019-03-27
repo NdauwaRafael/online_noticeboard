@@ -19,7 +19,7 @@ class Header extends Component {
                     </button>
 
                     {
-                        isAuthenticated ? <HeaderAuthenticated user={user} logoutUser={()=>this.props.logoutUser()} /> : <HeaderGuest />
+                        isAuthenticated ? <HeaderAuthenticated user={user} auth={auth} logoutUser={()=>this.props.logoutUser()} /> : <HeaderGuest />
                     }
 
                 </div>
