@@ -80,9 +80,9 @@ export const loginUser = (username, password) => dispatch => {
             ])
         })
         .catch(error => {
-            if (error.response.data && error.response.data.non_field_errors) {
+            if (error.response.data) {
                 return dispatch([
-                    getErrors('Login failed: ' + error.response.data.non_field_errors.join()),
+                    getErrors('Login failed!!'),
                     loginFailed(error.response.data),
                 ])
             } else {
