@@ -19,25 +19,48 @@ class PostForm extends Component {
                 title: '',
                 description: '',
                 category: ''
-            }
+            },
+            isAdmin: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.updateUser = this.updateUser.bind(this);
+    }
+
+    componentDidMount() {
+        this.updateUser(this.props.user);
     }
 
     componentDidUpdate(prevProps) {
-        const {errors, posts} = this.props;
+        const {errors, posts, user} = this.props;
         if (prevProps.errors !== errors) {
             this.setState({
                 errors
             })
         }
-        ;
+
         if (prevProps.posts !== posts) this.setState({
             title: '',
             description: ''
-        })
+        });
+
+        if (prevProps.user !== user) {
+            this.updateUser(user);
+        }
+        
+    }
+
+    updateUser(user) {
+        if (user.role === 'Administrator') {
+            this.setState({
+                isAdmin: true
+            })
+        } else {
+            this.setState({
+                isAdmin: false
+            })
+        }
     }
 
     handleChange(event) {
@@ -47,7 +70,7 @@ class PostForm extends Component {
     };
 
     postIsValid() {
-        let {title, description,category, errors} = this.state;
+        let {title, description, category, errors} = this.state;
         let isValid = true;
 
         if (title.length <= 3) {
@@ -92,7 +115,7 @@ class PostForm extends Component {
     }
 
     render() {
-        const {title, description, errors, category} = this.state;
+        const {title, description, errors, category, isAdmin} = this.state;
 
         const categoryOptions = [
             {
@@ -118,15 +141,20 @@ class PostForm extends Component {
                                value={title}
                                error={errors.title}
                                onChange={this.handleChange}/>
+                    {
+                        isAdmin ?
 
-                    <SelectInput
-                        name='category'
-                        label="Post Category"
-                        value={category}
-                        error={errors.category}
-                        options={categoryOptions}
-                        defaultOption="Select a Category"
-                        onChange={this.handleChange}/>
+                            <SelectInput
+                                name='category'
+                                label="Post Category"
+                                value={category}
+                                error={errors.category}
+                                options={categoryOptions}
+                                defaultOption="Select a Category"
+                                onChange={this.handleChange}/>
+                            : null
+                    }
+
 
                     <Textarea name="description"
                               label="Post Description"
@@ -148,10 +176,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = ({posts: {errors}, posts}) => {
+const mapStateToProps = ({posts: {errors}, posts, auth: {user}}) => {
     return {
         errors,
-        posts
+        posts,
+        user
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
