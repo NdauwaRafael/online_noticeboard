@@ -7,7 +7,6 @@ import {connect} from "react-redux";
 class AddUser extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             user: {
                 username: '',
@@ -15,7 +14,6 @@ class AddUser extends Component {
                 last_name: '',
                 email: '',
                 password: '',
-                bio: '',
                 registration_no: '',
                 role_id: '',
                 department_id: ''
@@ -26,7 +24,6 @@ class AddUser extends Component {
                 last_name: '',
                 email: '',
                 password: '',
-                bio: '',
                 registration_no: '',
                 role_id: '',
                 department_id: ''
@@ -38,7 +35,7 @@ class AddUser extends Component {
 
     componentDidUpdate(prevProps) {
         const {addUserErrors, users} = this.props;
-        if (prevProps.registrationErrors !== addUserErrors) {
+        if (prevProps.addUserErrors !== addUserErrors) {
             if (addUserErrors.username ||
                 addUserErrors.email ||
                 addUserErrors.password ||
@@ -53,7 +50,8 @@ class AddUser extends Component {
                 })
             }
         }
-        let user = {
+        if (prevProps.users !== users) this.setState({
+            user: {
                 username: '',
                 first_name: '',
                 last_name: '',
@@ -63,9 +61,7 @@ class AddUser extends Component {
                 registration_no: '',
                 role_id: '',
                 department_id: ''
-            };
-        if (prevProps.users !== users) this.setState({
-            user
+            }
         });
     };
 

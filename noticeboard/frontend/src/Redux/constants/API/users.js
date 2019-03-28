@@ -5,5 +5,5 @@ export const addUserApi = async (user, config) => {
 };
 
 export const getUsersApi = async (config) => {
-    return axios.get('api/users/', config);
+    return axios.get('api/users', config);
 };
