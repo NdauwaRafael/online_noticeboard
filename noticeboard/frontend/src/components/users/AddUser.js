@@ -76,13 +76,7 @@ class AddUser extends Component {
         } else {
             errors.password = ''
         }
-
-        if (user.cpassword !== user.password) {
-            errors.cpassword = 'Passwords do not match.';
-            isValid = false;
-        } else {
-            errors.cpassword = ''
-        }
+        
         if (!this.emailIsValid(user.email)) {
             errors.email = 'Enter a valid Email';
             isValid = false;
@@ -120,7 +114,7 @@ class AddUser extends Component {
         if (!this.userIsValid()) {
             return;
         }
-        // this.props.registerUser(this.state.user);
+        this.props.registerUser(this.state.user);
     }
 
     render() {

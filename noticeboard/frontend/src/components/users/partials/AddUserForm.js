@@ -43,7 +43,7 @@ const AddUserForm = ({user: {username, first_name, last_name, email, password, r
                 onChange={onChange}/>
 
             <SelectInput
-                name='department'
+                name='department_id'
                 label="User Department"
                 value={department_id}
                 error={errors.department_id}
@@ -52,7 +52,7 @@ const AddUserForm = ({user: {username, first_name, last_name, email, password, r
                 onChange={onChange}/>
 
             <SelectInput
-                name='role'
+                name='role_id'
                 label="User Role"
                 value={role_id}
                 error={errors.role_id}
