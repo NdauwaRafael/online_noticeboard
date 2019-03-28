@@ -53,7 +53,7 @@ class PostForm extends Component {
     }
 
     updateUser(user) {
-        if (user.role === 'Administrator' || user.role === 'HOD') {
+        if ( user.role === 'HOD') {
             this.setState({
                 isAdmin: true
             })

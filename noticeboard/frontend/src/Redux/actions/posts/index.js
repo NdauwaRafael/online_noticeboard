@@ -94,10 +94,10 @@ export const deletePostFailed = (resp) => {
     }
 }
 
-export const deletePost = (data) => (dispatch, getState) => {
+export const deletePost = (id) => (dispatch, getState) => {
 
-    postApi.DELETE_POST(data, tokenConfig(getState))
-        .then(resp => {
+    postApi.DELETE_POST(id, tokenConfig(getState))
+        .then(() => {
             return dispatch([
                 deletePostSuccess(id),
                 getMessages('Post have been deleted successfully!!')
