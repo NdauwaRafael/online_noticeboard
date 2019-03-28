@@ -37,10 +37,13 @@ export default (state = initialState, action) => {
                 addUserErrors: action.error
             };
         case UPDATE_USER_SUCCESS:
-            return [
-                ...state.filter(user => user.id !== action.user.id),
-                Object.assign({}, action.user)
-            ];
+            return {
+                ...state,
+                users: [
+                    state.users.filter(user => user.id !== action.user.id),
+                    Object.assign({}, action.user)
+                ]
+            };
 
         default:
             return state

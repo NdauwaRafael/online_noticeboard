@@ -37,7 +37,7 @@ export const getUsers = () => (dispatch, getState) => {
 export const updateUserSuccess = (resp) => {
     return {
         type: UPDATE_USER_SUCCESS,
-        users: resp
+        user: resp
     }
 };
 
@@ -53,7 +53,7 @@ export const updateUserFailed = (error) => {
 export const addUsersSuccess = (resp) => {
     return {
         type: ADD_USER_SUCCESS,
-        users: resp
+        user: resp
     }
 };
 
@@ -68,18 +68,23 @@ export const addUser = (user) => (dispatch, getState) => {
     if (user.id) {
         userAPI.updateUserApi(user, tokenConfig(getState))
             .then(resp => {
-                return dispatch(updateUserSuccess(resp.data.user))
+                return dispatch(updateUserSuccess(resp.data))
             })
             .catch(error => {
-                return dispatch(updateUserFailed(error.response.data))
+                console.log(error);
+                if(error.response){
+                    return dispatch(updateUserFailed(error.response.data))
+                }
             })
     } else {
         userAPI.addUserApi(user, tokenConfig(getState))
             .then(resp => {
-                return dispatch(addUsersSuccess(resp.data.user))
+                return dispatch(addUsersSuccess(resp.data))
             })
             .catch(error => {
-                return dispatch(addUsersFailed(error.response.data))
+                if(error.response){
+                    return dispatch(addUsersFailed(error.response.data))
+                }
             })
     }
 };

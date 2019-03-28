@@ -1,9 +1,9 @@
-from rest_framework import viewsets, generics, permissions
+from rest_framework import viewsets, generics, permissions, exceptions
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import get_user_model
 from .permissions import UserIsAdministrator
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, UpdateSerializer
 
 
 # Register API
@@ -49,9 +49,19 @@ class UsersViewSet(viewsets.ModelViewSet):
     serializer_class = RegisterSerializer
     permission_classes = [UserIsAdministrator]
 
-
     def get_queryset(self):
         return get_user_model().objects.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer, **kwargs):
+        serializer.save()
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == 'PUT':
+            serializer_class = UpdateSerializer
+
+        return serializer_class

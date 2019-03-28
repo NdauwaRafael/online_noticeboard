@@ -5,7 +5,7 @@ export const addUserApi = async (user, config) => {
 };
 
 export const updateUserApi = async (user, config) => {
-    return axios.put('api/users/', user, config);
+    return axios.put(`api/users/${user.id}/`, user, config);
 };
 
 export const getUsersApi = async (config) => {

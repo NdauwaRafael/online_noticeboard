@@ -41,19 +41,22 @@ class AddUser extends Component {
                 })
             }
         }
-        if (prevProps.users !== users) this.setState({
-            user: {
-                username: '',
-                first_name: '',
-                last_name: '',
-                email: '',
-                password: '',
-                bio: '',
-                registration_no: '',
-                role_id: '',
-                department_id: ''
-            }
-        });
+        if (prevProps.users !== users) {
+            this.setState({
+                user: {
+                    username: '',
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    password: '',
+                    bio: '',
+                    registration_no: '',
+                    role_id: '',
+                    department_id: ''
+                }
+            });
+            this.props.history.push('/users');
+        }
         if (prevProps.userDetails.id !== userDetails.id) {
             this.setState({
                 user: Object.assign({}, userDetails)
@@ -76,13 +79,15 @@ class AddUser extends Component {
         } else {
             errors.username = ''
         }
-        if (user.password.length < 6) {
-            errors.password = 'Password is too short. Password should be atleast 6 characters long';
-            isValid = false;
-        } else {
-            errors.password = ''
-        }
 
+        if (!user.id) {
+            if (user.password.length < 6) {
+                errors.password = 'Password is too short. Password should be atleast 6 characters long';
+                isValid = false;
+            } else {
+                errors.password = ''
+            }
+        }
         if (!this.emailIsValid(user.email)) {
             errors.email = 'Enter a valid Email';
             isValid = false;
@@ -154,6 +159,7 @@ const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}
         first_name: '',
         last_name: '',
         email: '',
+        bio: '',
         registration_no: '',
         role_id: '',
         department_id: ''
