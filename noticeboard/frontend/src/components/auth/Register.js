@@ -7,7 +7,7 @@ import {Redirect} from 'react-router-dom';
 
 export class Register extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             user: {

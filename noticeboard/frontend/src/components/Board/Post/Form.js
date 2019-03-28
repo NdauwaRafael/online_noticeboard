@@ -18,7 +18,8 @@ class PostForm extends Component {
             errors: {
                 title: '',
                 description: '',
-                category: ''
+                category: '',
+                department: ''
             },
             isAdmin: false
         };

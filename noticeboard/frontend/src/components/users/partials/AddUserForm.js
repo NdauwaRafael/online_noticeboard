@@ -1,9 +1,9 @@
 import React from 'react';
 import TextInput from '../../common/form/Input';
-import Textarea from '../../common/form/Textarea';
 import PropTypes from "prop-types";
+import SelectInput from "../../common/form/Select";
 
-const AddUserForm = ({user: {username, first_name, last_name, email, password, bio, registration_no}, onChange, onSave, errors}) => {
+const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id}, onChange, onSave, errors, departments}) => {
     return (
         <form onSubmit={onSave}>
             <TextInput
@@ -42,14 +42,14 @@ const AddUserForm = ({user: {username, first_name, last_name, email, password, b
                 error={errors.registration_no}
                 onChange={onChange}/>
 
-            <Textarea
-                name='bio'
-                label='Bio(Optional)'
-                value={bio}
-                erro={errors.bio}
-                onChange={onChange}
-                rows='3'
-            />
+            <SelectInput
+                name='department'
+                label="Post Department"
+                value={department_id}
+                error={errors.department_id}
+                options={departments}
+                defaultOption="Select a Department"
+                onChange={this.handleChange}/>
 
             <TextInput
                 type='password'
