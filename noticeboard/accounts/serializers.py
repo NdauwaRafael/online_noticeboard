@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 
 # User Serializer
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    department = serializers.RelatedField(source='department_id', read_only=True)
+    department = serializers.ReadOnlyField(source='department_id.id', read_only=True, allow_null=True)
     role = serializers.ReadOnlyField(source='role_id.role')
     # posts = PostSerializer(many=True, read_only=True)
 
