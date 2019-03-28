@@ -2,7 +2,9 @@ import {
     GET_USERS_SUCCESS,
     GET_USERS_FAILED,
     ADD_USER_SUCCESS,
-    ADD_USER_FAILED
+    ADD_USER_FAILED,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAILED
 } from '../../constants/actionTypes';
 import * as userAPI from '../../constants/API/users';
 import {tokenConfig} from "../auth";
@@ -31,6 +33,20 @@ export const getUsers = () => (dispatch, getState) => {
             return dispatch(getUsersFailed(error.response.data))
         })
 };
+//UPDATE
+export const updateUserSuccess = (resp) => {
+    return {
+        type: UPDATE_USER_SUCCESS,
+        users: resp
+    }
+};
+
+export const updateUserFailed = (error) => {
+    return {
+        type: UPDATE_USER_FAILED,
+        error
+    }
+};
 
 //ADD
 
@@ -49,11 +65,21 @@ export const addUsersFailed = (error) => {
 };
 
 export const addUser = (user) => (dispatch, getState) => {
-    userAPI.addUserApi(user, tokenConfig(getState))
-        .then(resp => {
-            return dispatch(addUsersSuccess(resp.data))
-        })
-        .catch(error => {
-            return dispatch(addUsersFailed(error.response.data))
-        })
+    if (user.id) {
+        userAPI.updateUserApi(user, tokenConfig(getState))
+            .then(resp => {
+                return dispatch(updateUserSuccess(resp.data))
+            })
+            .catch(error => {
+                return dispatch(updateUserFailed(error.response.data))
+            })
+    } else {
+        userAPI.addUserApi(user, tokenConfig(getState))
+            .then(resp => {
+                return dispatch(addUsersSuccess(resp.data))
+            })
+            .catch(error => {
+                return dispatch(addUsersFailed(error.response.data))
+            })
+    }
 };
