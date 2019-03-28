@@ -9,7 +9,7 @@ class Posts extends Component {
         this.deletePost = this.deletePost.bind(this);
     }
     componentDidMount() {
-        this.props.getPosts();
+        this.props.getPosts('public');
     }
 
     deletePost(id) {

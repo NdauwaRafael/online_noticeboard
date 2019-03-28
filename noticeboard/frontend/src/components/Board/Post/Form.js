@@ -115,8 +115,8 @@ class PostForm extends Component {
     }
 
     render() {
-        const {title, description, errors, category, isAdmin} = this.state;
-
+        const {title, description, errors, category, isAdmin, department} = this.state;
+        const {departments} = this.props;
         const categoryOptions = [
             {
                 value: 'public',
@@ -158,12 +158,12 @@ class PostForm extends Component {
                         category === 'departmental' ?
 
                             <SelectInput
-                                name='category'
-                                label="Post Category"
-                                value={category}
-                                error={errors.category}
-                                options={categoryOptions}
-                                defaultOption="Select a Category"
+                                name='department'
+                                label="Post Department"
+                                value={department}
+                                error={errors.department}
+                                options={departments}
+                                defaultOption="Select a Department"
                                 onChange={this.handleChange}/>
                             : null
                     }
@@ -188,11 +188,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = ({posts: {errors}, posts, auth: {user}}) => {
+const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {departments}}) => {
     return {
         errors,
         posts,
-        user
+        user,
+        departments
     }
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
