@@ -111,4 +111,4 @@ export const deleteUser = (id) => (dispatch, getState) => {
         .catch(error => {
             return dispatch(getErrors('Failed to delete!!' + error.toString()))
         })
-}
+};

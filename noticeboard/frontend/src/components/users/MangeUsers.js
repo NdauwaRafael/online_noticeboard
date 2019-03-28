@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import UsersTable from "./partials/UsersTable";
 import {bindActionCreators} from "redux";
-import {getUsers} from "../../Redux/actions/users";
+import {getUsers, deleteUser} from "../../Redux/actions/users";
 import {connect} from "react-redux";
 
 class MangeUsers extends Component {
@@ -14,7 +14,7 @@ class MangeUsers extends Component {
         return (
             <Fragment>
                 <h1>All Users </h1>
-                <UsersTable users={users} auth={auth} authUser={auth.user}/>
+                <UsersTable users={users} auth={auth} authUser={auth.user} deleteUser={this.props.deleteUser}/>
             </Fragment>
         )
     }
@@ -29,7 +29,8 @@ const mapStateToProps = ({users: {users}, auth}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUsers: bindActionCreators(getUsers, dispatch)
+        getUsers: bindActionCreators(getUsers, dispatch),
+        deleteUser: bindActionCreators(deleteUser, dispatch)
     }
 };
 
