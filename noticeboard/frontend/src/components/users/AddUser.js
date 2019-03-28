@@ -34,7 +34,7 @@ class AddUser extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const {addUserErrors, users} = this.props;
+        const {addUserErrors, users, userDetails} = this.props;
         if (prevProps.addUserErrors !== addUserErrors) {
             if (addUserErrors.username ||
                 addUserErrors.email ||
@@ -63,6 +63,11 @@ class AddUser extends Component {
                 department_id: ''
             }
         });
+        if (prevProps.userDetails.id !== userDetails.id) {
+            this.setState({
+                user: Object.assign({}, userDetails)
+            })
+        }
     };
 
     emailIsValid(email) {
@@ -145,7 +150,21 @@ class AddUser extends Component {
     }
 };
 
-const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}, users: {users, addUserErrors}}) => {
+const getUserByID = (users, id) => {
+    let user = users.filter(user => user.id === id);
+    if (user.length > 0) {
+        return user[0]
+    }
+    return null;
+};
+const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}, users: {users, addUserErrors}}, ownProps) => {
+    let userDetails = {username: '', first_name: '', last_name: '', email: '', password: '', registration_no: '', role_id: '', department_id: ''
+    };
+    let userId = ownProps.match.params.id;
+    if (userId && users.length > 0) {
+        userDetails = getUserByID(users, userId);
+    }
+
     const departmentFormattedForDropdown = departments.map(department => {
         return {
             value: department.id,
@@ -164,7 +183,8 @@ const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}
         departments: departmentFormattedForDropdown,
         roles: rolesFormattedForDropdown,
         users,
-        addUserErrors
+        addUserErrors,
+        userDetails
     }
 };
 const mapDispatchToProps = (dispatch) => {
