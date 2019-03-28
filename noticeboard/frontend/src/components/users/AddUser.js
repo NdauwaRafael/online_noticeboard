@@ -112,7 +112,7 @@ class AddUser extends Component {
         if (!this.userIsValid()) {
             return;
         }
-        this.props.registerUser(this.state.user);
+        // this.props.registerUser(this.state.user);
     }
 
     render() {
