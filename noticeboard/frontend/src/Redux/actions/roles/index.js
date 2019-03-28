@@ -3,6 +3,7 @@ import {
     GET_ROLES_FAILED
 } from '../../constants/actionTypes';
 import * as rolesAPI from '../../constants/API/roles';
+import {tokenConfig} from "../auth";
 
 export const getRolesSuccess = (resp) => {
     return {
@@ -12,7 +13,7 @@ export const getRolesSuccess = (resp) => {
 };
 
 
-export const getRolesFailes = (error) => {
+export const getRolesFailed = (error) => {
     return {
         type: GET_ROLES_FAILED,
         error: error
@@ -20,7 +21,11 @@ export const getRolesFailes = (error) => {
 };
 
 export const getRoles = () => (dispatch, getState) => {
-    rolesAPI.getRolessApi()
-        .then(resp=>{})
-        .catch(error=>{})
+    rolesAPI.getRolessApi(tokenConfig(getState))
+        .then(resp=>{
+            return dispatch(getRolesSuccess(resp.data));
+        })
+        .catch(error=>{
+            return dispatch(getRolesFailed(error.response.data));
+        })
 };
