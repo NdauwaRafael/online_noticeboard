@@ -26,6 +26,7 @@ export default (
         <PrivateRoute path="/posts/departmental" exact component={DepartmentalPosts} />
         <EditorRoute path="/addpost" exact component={AddPost} />
         <AdminRoute path='/user/add'  exact component={AddUser}/>
+        <AdminRoute path='/user/:id'  exact component={AddUser}/>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
     </Switch>
