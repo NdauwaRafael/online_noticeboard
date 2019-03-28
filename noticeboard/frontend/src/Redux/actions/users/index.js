@@ -68,7 +68,7 @@ export const addUser = (user) => (dispatch, getState) => {
     if (user.id) {
         userAPI.updateUserApi(user, tokenConfig(getState))
             .then(resp => {
-                return dispatch(updateUserSuccess(resp.data))
+                return dispatch(updateUserSuccess(resp.data.user))
             })
             .catch(error => {
                 return dispatch(updateUserFailed(error.response.data))
@@ -76,7 +76,7 @@ export const addUser = (user) => (dispatch, getState) => {
     } else {
         userAPI.addUserApi(user, tokenConfig(getState))
             .then(resp => {
-                return dispatch(addUsersSuccess(resp.data))
+                return dispatch(addUsersSuccess(resp.data.user))
             })
             .catch(error => {
                 return dispatch(addUsersFailed(error.response.data))
