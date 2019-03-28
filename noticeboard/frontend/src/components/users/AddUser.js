@@ -37,7 +37,7 @@ class AddUser extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const {addUserErrors} = this.props;
+        const {addUserErrors, users} = this.props;
         if (prevProps.registrationErrors !== addUserErrors) {
             if (addUserErrors.username ||
                 addUserErrors.email ||
@@ -53,6 +53,20 @@ class AddUser extends Component {
                 })
             }
         }
+        let user = {
+                username: '',
+                first_name: '',
+                last_name: '',
+                email: '',
+                password: '',
+                bio: '',
+                registration_no: '',
+                role_id: '',
+                department_id: ''
+            };
+        if (prevProps.users !== users) this.setState({
+            user
+        });
     };
 
     emailIsValid(email) {
@@ -76,7 +90,7 @@ class AddUser extends Component {
         } else {
             errors.password = ''
         }
-        
+
         if (!this.emailIsValid(user.email)) {
             errors.email = 'Enter a valid Email';
             isValid = false;
