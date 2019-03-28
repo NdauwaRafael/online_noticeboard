@@ -21,18 +21,18 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 errors: action.errors
-            }
+            };
         case GET_POSTS_SUCCESS:
             return {
                 ...state,
                 posts: action.posts
-            }
+            };
 
         case DELETE_POST_SUCCESS:
             return {
                 ...state,
                 posts: state.posts.filter(post => post.id !== action.id)
-            }
+            };
 
         default:
 

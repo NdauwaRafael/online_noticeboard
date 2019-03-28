@@ -4,7 +4,8 @@ import {
     ADD_USER_SUCCESS,
     ADD_USER_FAILED,
     UPDATE_USER_SUCCESS,
-    UPDATE_USER_FAILED
+    UPDATE_USER_FAILED,
+    DELETE_USER_SUCCESS
 } from '../../constants/actionTypes';
 
 const initialState = {
@@ -44,7 +45,11 @@ export default (state = initialState, action) => {
                     Object.assign({}, action.user)
                 ]
             };
-
+        case DELETE_USER_SUCCESS:
+            return {
+                ...state,
+                users: state.users.filter(user => user.id !== action.id)
+            };
         default:
             return state
     }
