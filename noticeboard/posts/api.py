@@ -31,6 +31,8 @@ class PostViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.request.method == 'GET':
             permission_classes = [permissions.IsAuthenticated]
+        elif self.request.method == 'DELETE':
+            permission_classes = [CanPublishPublic, IsOwnerOrReadOnly]
         else:
             if self.request.data['category'] == 'public':
                 permission_classes = [CanPublishPublic, IsOwnerOrReadOnly]

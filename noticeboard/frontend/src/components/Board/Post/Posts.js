@@ -13,7 +13,6 @@ class Posts extends Component {
     }
 
     deletePost(id) {
-        console.log(id)
         this.props.deleteThisPost(id)
     }
 
