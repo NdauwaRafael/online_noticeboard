@@ -7,7 +7,8 @@ import store from '../Redux';
 import Alerts from './Layouts/Alerts';
 import AppRoutes from '../router';
 import { loadUser } from '../Redux/actions/auth';
-import {getDepartments} from '../Redux/actions/departments'
+import {getDepartments} from '../Redux/actions/departments';
+import {getRoles} from "../Redux/actions/roles";
 //ALERTS
 import { transitions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
@@ -22,6 +23,7 @@ class App extends Component {
     componentDidMount() {
         store.dispatch(loadUser());
         store.dispatch(getDepartments());
+        store.dispatch(getRoles());
     }
     render() {
         return (
