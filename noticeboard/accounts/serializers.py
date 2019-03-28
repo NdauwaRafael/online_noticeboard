@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 
 # User Serializer
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    department = serializers.ReadOnlyField(source='department_id.id')
+    department = serializers.RelatedField(source='department_id', read_only=True)
     role = serializers.ReadOnlyField(source='role_id.role')
     # posts = PostSerializer(many=True, read_only=True)
 
@@ -14,7 +14,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = (
             'id', 'username', 'email', 'first_name', 'last_name',
-            'registration_no', 'bio', 'department', 'role')
+            'registration_no', 'bio', 'owner', 'department', 'role')
 
 
 # Register Serializer
@@ -22,7 +22,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                  'registration_no', 'department_id', 'role_id', 'bio', 'password')
+                  'registration_no', 'department_id', 'role_id', 'bio', 'owner', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
