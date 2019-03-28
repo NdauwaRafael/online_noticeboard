@@ -33,3 +33,27 @@ export const getUsers = () => (dispatch, getState) => {
 };
 
 //ADD
+
+export const addUsersSuccess = (resp) => {
+    return {
+        type: ADD_USER_SUCCESS,
+        users: resp
+    }
+};
+
+export const addUsersFailed = (error) => {
+    return {
+        type: ADD_USER_FAILED,
+        error
+    }
+};
+
+export const addUser = (user) => (dispatch, getState) => {
+    userAPI.addUserApi(user, tokenConfig(getState))
+        .then(resp => {
+            return dispatch(addUsersSuccess(resp.data))
+        })
+        .catch(error => {
+            return dispatch(addUsersFailed(error.response.data))
+        })
+};

@@ -5,6 +5,7 @@ import messages from './messages';
 import auth from './auth'
 import departments from './departments';
 import roles from './roles';
+import users from './users';
 
 export default combineReducers({
     posts,
@@ -12,5 +13,6 @@ export default combineReducers({
     messages,
     auth,
     departments,
-    roles
+    roles,
+    users
 })
