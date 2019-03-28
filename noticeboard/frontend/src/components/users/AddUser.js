@@ -117,13 +117,14 @@ class AddUser extends Component {
 
     render() {
         let {user, errors} = this.state;
-        let {departments} = this.props;
+        let {departments, roles} = this.props;
 
         return (
             <Fragment>
                 <AddUserForm
                     user={user}
                     departments={departments}
+                    roles={roles}
                     errors={errors}
                     onChange={this.handleChange}
                     onSave={this.onSave}/>
@@ -133,6 +134,7 @@ class AddUser extends Component {
 };
 
 const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}}) => {
+    console.log(roles);
     const departmentFormattedForDropdown = departments.map(department => {
         return {
             value: department.id,
