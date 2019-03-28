@@ -134,7 +134,6 @@ class AddUser extends Component {
 };
 
 const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}}) => {
-    console.log(roles);
     const departmentFormattedForDropdown = departments.map(department => {
         return {
             value: department.id,
