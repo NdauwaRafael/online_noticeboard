@@ -189,11 +189,17 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {departments}}) => {
+        const departmentFormattedForDropdown = departments.map(department => {
+        return {
+            value: department.id,
+            text: department.title
+        };
+    });
     return {
         errors,
         posts,
         user,
-        departments
+        departments: departmentFormattedForDropdown
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
