@@ -8,16 +8,7 @@ class AddUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                username: '',
-                first_name: '',
-                last_name: '',
-                email: '',
-                password: '',
-                registration_no: '',
-                role_id: '',
-                department_id: ''
-            },
+            user: Object.assign({}, this.props.userDetails),
             errors: {
                 username: '',
                 first_name: '',
@@ -151,7 +142,7 @@ class AddUser extends Component {
 };
 
 const getUserByID = (users, id) => {
-    let user = users.filter(user => user.id === id);
+    let user = users.filter(user => parseInt(user.id) === parseInt(id));
     if (user.length > 0) {
         return user[0]
     }

@@ -7,7 +7,7 @@ class TextInput extends Component {
         const { name, value, label, error, onChange, type } = this.props;
         let validatorClass = '';
         let parentValidator = '';
-        let errorMessageValidator = ''
+        let errorMessageValidator = '';
         if (error.length > 0) {
             validatorClass = 'is-invalid';
             parentValidator = 'has-danger';
@@ -22,7 +22,7 @@ class TextInput extends Component {
             <div className={"form-group " + parentValidator}>
                 <label htmlFor={name}>{label}</label>
                 <input type={type ? type : "text"}
-                    value={value}
+                    value={value || ''}
                     id={name}
                     name={name}
                     onChange={onChange}

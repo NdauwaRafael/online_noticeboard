@@ -24,7 +24,7 @@ class Select extends Component {
                 <select
                     className={"custom-select" + validatorClass}
                     id={name}
-                    value={value}
+                    value={value || ''}
                     name={name}
                     ref={name}
                     onChange={onChange}>
@@ -45,7 +45,6 @@ class Select extends Component {
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.string,
     label: PropTypes.string.isRequired,
     // error: PropTypes.string,
     onChange: PropTypes.func.isRequired

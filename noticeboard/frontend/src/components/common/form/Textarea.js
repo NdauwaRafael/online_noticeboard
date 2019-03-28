@@ -22,7 +22,7 @@ class Textarea extends Component {
             <div className={"form-group " + parentValidator}>
                 <label htmlFor={name}>{label}</label>
                 <textarea
-                    value={value}
+                    value={value || ''}
                     rows={rows}
                     id={name}
                     name={name}
