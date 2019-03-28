@@ -42,10 +42,9 @@ export const loadUser = () => (dispatch, getState) => {
             ])
         })
         .catch(error => {
-            return dispatch([
-                loadUserFailed(error.response.data),
-                // getErrors(error.response.data.details)
-            ])
+            if(error.response){
+                return dispatch(loadUserFailed(error.response.data))
+            }
         })
 };
 
@@ -86,10 +85,7 @@ export const loginUser = (username, password) => dispatch => {
                     loginFailed(error.response.data),
                 ])
             } else {
-                return dispatch([
-                    loginFailed(error.response.data),
-                    getErrors('Login Failed')
-                ])
+                return dispatch(getErrors('Login Failed'))
             }
         })
 };

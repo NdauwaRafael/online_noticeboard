@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
             return {...state, isLoading: true};
         case USER_LOADED:
             let userCanPost = false;
-            if (action.user.role === 'Administrator' || action.user.role === 'HOD' || action.user.role === 'student_leader') {
+            if (action.user.payload.role === 'Administrator' || action.payload.user.role === 'HOD' || action.payload.user.role === 'student_leader') {
                 userCanPost = true;
             }
             return {...state, isLoading: false, isAuthenticated: true, user: action.user, canAddPost: userCanPost };
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
             let canPost = false;
-            if (action.user.role === 'Administrator' || action.user.role === 'HOD' || action.user.role === 'student_leader') {
+            if (action.payload.user.role === 'Administrator' || action.payload.user.role === 'HOD' || action.payload.user.role === 'student_leader') {
                 canPost = true;
             }
             return {

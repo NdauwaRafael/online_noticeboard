@@ -13,7 +13,7 @@ export default ({posts, auth: {user}}) =>
         <tbody>
         {
             posts.map((post, index) => (
-                <tr key={post.id}>
+                <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{post.title}</td>
                     <td>{post.description}</td>

@@ -9,15 +9,11 @@ class Posts extends Component {
         this.deletePost = this.deletePost.bind(this);
     }
     componentDidMount() {
-        this.props.getPosts();
+        this.props.getPosts('departmental');
     }
 
     deletePost(id) {
-        let data = {
-            id,
-            category: 'departmental'
-        };
-        this.props.deleteThisPost(data)
+        this.props.deleteThisPost(id)
     }
 
     render() {
