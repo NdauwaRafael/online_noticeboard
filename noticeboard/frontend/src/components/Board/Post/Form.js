@@ -48,11 +48,11 @@ class PostForm extends Component {
         if (prevProps.user !== user) {
             this.updateUser(user);
         }
-        
+
     }
 
     updateUser(user) {
-        if (user.role === 'Administrator') {
+        if (user.role === 'Administrator' || user.role === 'HOD') {
             this.setState({
                 isAdmin: true
             })
@@ -154,7 +154,19 @@ class PostForm extends Component {
                                 onChange={this.handleChange}/>
                             : null
                     }
+                    {
+                        category === 'departmental' ?
 
+                            <SelectInput
+                                name='category'
+                                label="Post Category"
+                                value={category}
+                                error={errors.category}
+                                options={categoryOptions}
+                                defaultOption="Select a Category"
+                                onChange={this.handleChange}/>
+                            : null
+                    }
 
                     <Textarea name="description"
                               label="Post Description"
