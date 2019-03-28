@@ -35,7 +35,7 @@ export default ({users, auth, authUser, deleteUser}) =>
                                 <Link to={"/user/"+user.id} type="button" style={{marginRight: 20}}
                                       className="btn btn-outline-success">Edit
                                 </Link>
-                                < button type="button" className="btn btn-outline-danger"
+                                <button type="button" className="btn btn-outline-danger"
                                          onClick={() => deleteUser(user.id)}>Delete
                                 </button>
                             </td>

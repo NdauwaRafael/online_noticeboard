@@ -95,17 +95,18 @@ export const addUser = (user) => (dispatch, getState) => {
 };
 
 //DELETE
-export const deleteUserSuccess = (resp) => {
+export const deleteUserSuccess = (id) => {
     return {
-        type: DELETE_USER_SUCCESS
+        type: DELETE_USER_SUCCESS,
+        id
     }
 };
 
 export const deleteUser = (id) => (dispatch, getState) => {
     userAPI.deleteUserApi(id, tokenConfig(getState))
-        .then(resp => {
+        .then(() => {
             return dispatch([
-                deleteUserSuccess(resp),
+                deleteUserSuccess(id),
                 getMessages('User was deleted successfully!!'),])
         })
         .catch(error => {

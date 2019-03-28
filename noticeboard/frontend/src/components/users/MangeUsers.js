@@ -5,16 +5,24 @@ import {getUsers, deleteUser} from "../../Redux/actions/users";
 import {connect} from "react-redux";
 
 class MangeUsers extends Component {
+    constructor(props){
+        super(props);
+        this.deleteThisUser = this.deleteThisUser.bind(this);
+    }
     componentDidMount() {
         this.props.getUsers();
     }
+
+    deleteThisUser(userId) {
+        this.props.deleteUser(userId)
+    };
 
     render() {
         const {users, auth} = this.props;
         return (
             <Fragment>
                 <h1>All Users </h1>
-                <UsersTable users={users} auth={auth} authUser={auth.user} deleteUser={this.props.deleteUser}/>
+                <UsersTable users={users} auth={auth} authUser={auth.user} deleteUser={this.deleteThisUser}/>
             </Fragment>
         )
     }

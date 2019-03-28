@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({posts, auth: {user}}) =>
+export default ({posts, auth: {user}, deletePost}) =>
     <table className="table">
         <thead className="thead-dark">
         <tr>
@@ -23,7 +23,7 @@ export default ({posts, auth: {user}}) =>
                         {
                             post.owner === user.id ?
                                 <button type="button" className="btn btn-outline-danger"
-                                        onClick={() => this.deletePost(post.id)}>Delete</button>
+                                        onClick={() => deletePost(post.id)}>Delete</button>
                                 : null
                         }
                     </td>

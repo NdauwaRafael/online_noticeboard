@@ -35,10 +35,6 @@ export const getPosts = async (category, config) => {
     }
 };
 
-export const DELETE_POST = async ({id, category}, config) => {
-    if(category === 'public'){
-
-    }else{
-        return axios.delete('api/posts/' + id, config)
-    }
+export const DELETE_POST = async (id, config) => {
+    return axios.delete('api/posts/' + id, config)
 };

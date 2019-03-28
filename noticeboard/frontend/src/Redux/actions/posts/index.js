@@ -80,6 +80,7 @@ export const getAllPosts = (category) => (dispatch, getState) => {
 
 //DELETE POST
 export const deletePostSuccess = (resp) => {
+    console.log(resp)
     return {
         type: DELETE_POST_SUCCESS,
         id: resp
@@ -87,14 +88,14 @@ export const deletePostSuccess = (resp) => {
 };
 
 export const deletePostFailed = (resp) => {
-    console.log(resp, 'error')
     return {
-        action: DELETE_POST_FAILED,
+        type: DELETE_POST_FAILED,
         error: resp
     }
 }
 
 export const deletePost = (data) => (dispatch, getState) => {
+
     postApi.DELETE_POST(data, tokenConfig(getState))
         .then(resp => {
             return dispatch([

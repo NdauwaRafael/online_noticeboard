@@ -13,6 +13,7 @@ class Posts extends Component {
     }
 
     deletePost(id) {
+        console.log(id)
         this.props.deleteThisPost(id)
     }
 
@@ -22,7 +23,7 @@ class Posts extends Component {
         return (
             <Fragment>
                 <h1>Public Posts </h1>
-                <PostsTable posts={posts} auth={auth} />
+                <PostsTable posts={posts} auth={auth} deletePost={this.deletePost} />
             </Fragment>
         )
     }
