@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics, permissions, exceptions
+from rest_framework import viewsets, generics, permissions, exceptions, status
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import get_user_model
@@ -57,6 +57,9 @@ class UsersViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer, **kwargs):
         serializer.save()
+
+    def perform_destroy(self, instance):
+        instance.delete()
 
     def get_serializer_class(self):
         serializer_class = self.serializer_class
