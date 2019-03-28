@@ -22,6 +22,12 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def perform_update(self, serializer, **kwargs):
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        instance.delete()
+
     def get_permissions(self):
         if self.request.method == 'GET':
             permission_classes = [permissions.IsAuthenticated]
@@ -31,7 +37,6 @@ class PostViewSet(viewsets.ModelViewSet):
             else:
                 permission_classes = [UserIsHOD, IsOwnerOrReadOnly]
         return [permission() for permission in permission_classes]
-
 
 # # Departmental posts
 # class DepartmentPostViewSet(viewsets.ModelViewSet):
