@@ -9,7 +9,7 @@ export const updateUserApi = async (user, config) => {
 };
 
 export const deleteUserApi = async (id, config) => {
-    return axios.delete(`api/users/${id}/`, user, config);
+    return axios.delete(`api/users/${id}/`, config);
 };
 
 export const getUsersApi = async (config) => {
