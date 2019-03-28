@@ -5,6 +5,8 @@ import {
 import * as rolesAPI from '../../constants/API/roles';
 import {tokenConfig} from "../auth";
 
+
+//GET ROLES
 export const getRolesSuccess = (resp) => {
     return {
         type: GET_ROLES_SUCCESS,
