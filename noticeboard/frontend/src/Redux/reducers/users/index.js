@@ -1,11 +1,14 @@
 import {
     GET_USERS_SUCCESS,
     GET_USERS_FAILED,
+    ADD_USER_SUCCESS,
+    ADD_USER_FAILED
 } from '../../constants/actionTypes';
 
 const initialState = {
     loadingUsers: false,
-    users: []
+    users: [],
+    addUserError: {}
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +23,17 @@ export default (state = initialState, action) => {
                 ...state,
                 users: []
             };
+        case ADD_USER_SUCCESS:
+            return {
+                ...state,
+                users: [...state.users, action.user]
+            };
+        case ADD_USER_FAILED:
+            return {
+                ...state,
+                addUserError: action.error
+            };
+
         default:
             return state
     }
