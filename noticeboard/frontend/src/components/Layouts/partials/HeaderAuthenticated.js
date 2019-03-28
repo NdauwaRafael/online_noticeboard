@@ -48,7 +48,7 @@ export default ({logoutUser, auth: {user}, Fragment}) => {
                                         <div className="dropdown-divider"/>
                                         <Link className="dropdown-item" to="/user/add"
                                         >Add Users</Link>
-                                        <Link className="dropdown-item" to="/user/view"
+                                        <Link className="dropdown-item" to="/users"
                                         >View Users</Link>
                                         <div className="dropdown-divider"/>
                                         <a className="dropdown-item" href="#"
@@ -79,7 +79,7 @@ export default ({logoutUser, auth: {user}, Fragment}) => {
                         <button className="dropdown-item"
                         >FAQS
                         </button>
-                        <div className="dropdown-divider"></div>
+                        <div className="dropdown-divider" />
                         <button className="dropdown-item"
                         >Account Terms
                         </button>

@@ -5,12 +5,16 @@ import {getUsers} from "../../Redux/actions/users";
 import {connect} from "react-redux";
 
 class MangeUsers extends Component {
+    componentDidMount() {
+        this.props.getUsers();
+    }
+
     render() {
         const {users, auth} = this.props;
         return (
             <Fragment>
                 <h1>All Users </h1>
-                <UsersTable users={users} auth={auth}/>
+                <UsersTable users={users} auth={auth} authUser={auth.user}/>
             </Fragment>
         )
     }
