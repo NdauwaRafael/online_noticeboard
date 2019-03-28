@@ -3,7 +3,7 @@ import TextInput from '../../common/form/Input';
 import PropTypes from "prop-types";
 import SelectInput from "../../common/form/Select";
 
-const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id}, onChange, onSave, errors, departments}) => {
+const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id, role_id}, onChange, onSave, errors, departments}) => {
     return (
         <form onSubmit={onSave}>
             <TextInput
@@ -44,12 +44,21 @@ const AddUserForm = ({user: {username, first_name, last_name, email, password, r
 
             <SelectInput
                 name='department'
-                label="Post Department"
+                label="User Department"
                 value={department_id}
                 error={errors.department_id}
                 options={departments}
                 defaultOption="Select a Department"
-                onChange={this.handleChange}/>
+                onChange={onChange}/>
+
+            <SelectInput
+                name='role'
+                label="User Role"
+                value={role_id}
+                error={errors.role_id}
+                options={roles}
+                defaultOption="Select a Role"
+                onChange={onChange}/>
 
             <TextInput
                 type='password'

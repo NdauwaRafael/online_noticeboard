@@ -3,8 +3,6 @@ import AddUserForm from './partials/AddUserForm';
 import {bindActionCreators} from "redux";
 import {registerUser} from "../../Redux/actions/auth";
 import {connect} from "react-redux";
-import {Register} from "../auth/Register";
-import RegisterForm from "../auth/Register";
 
 class AddUser extends Component {
     constructor(props) {
@@ -28,7 +26,6 @@ class AddUser extends Component {
                 last_name: '',
                 email: '',
                 password: '',
-                cpassword: '',
                 bio: '',
                 registration_no: '',
                 role_id: '',
@@ -48,20 +45,12 @@ class AddUser extends Component {
                 })
             }
         }
-    }
-
-    handleChange(event) {
-        let field = event.target.name;
-        let value = event.target.value;
-        let user = Object.assign({}, this.state.user);
-        user[field] = value;
-        return this.setState({user});
     };
 
     emailIsValid(email) {
         const emailRegex = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
         return emailRegex.test(String(email).toLowerCase());
-    }
+    };
 
     userIsValid() {
         let {user, errors} = this.state;
@@ -108,6 +97,22 @@ class AddUser extends Component {
         this.setState({errors});
 
         return isValid;
+    };
+
+    handleChange(event) {
+        let field = event.target.name;
+        let value = event.target.value;
+        let user = Object.assign({}, this.state.user);
+        user[field] = value;
+        return this.setState({user});
+    };
+
+    onSave(e) {
+        e.preventDefault();
+        if (!this.userIsValid()) {
+            return;
+        }
+        this.props.registerUser(this.state.user);
     }
 
     render() {
@@ -127,7 +132,7 @@ class AddUser extends Component {
     }
 };
 
-const mapStateToProps = ({auth: {registrationErrors}, departments}) => {
+const mapStateToProps = ({auth: {registrationErrors}, departments:{departments}}) => {
     const departmentFormattedForDropdown = departments.map(department => {
         return {
             value: department.id,

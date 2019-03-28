@@ -46,10 +46,10 @@ export default ({logoutUser, auth: {user}, Fragment}) => {
                                 {user.role === 'Administrator' ?
                                     <Fragment>
                                         <div className="dropdown-divider"/>
-                                        <a className="dropdown-item" href="#"
-                                        >Add Users</a>
-                                        <a className="dropdown-item" href="#"
-                                        >View Users</a>
+                                        <Link className="dropdown-item" to="/user/add"
+                                        >Add Users</Link>
+                                        <Link className="dropdown-item" to="/user/view"
+                                        >View Users</Link>
                                         <div className="dropdown-divider"/>
                                         <a className="dropdown-item" href="#"
                                         >Manage Users</a>
