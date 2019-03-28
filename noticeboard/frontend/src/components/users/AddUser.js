@@ -149,11 +149,20 @@ const getUserByID = (users, id) => {
     return null;
 };
 const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}, users: {users, addUserErrors}}, ownProps) => {
-    let userDetails = {username: '', first_name: '', last_name: '', email: '', password: '', registration_no: '', role_id: '', department_id: ''
+    let userDetails = {
+        username: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        registration_no: '',
+        role_id: '',
+        department_id: ''
     };
     let userId = ownProps.match.params.id;
     if (userId && users.length > 0) {
         userDetails = getUserByID(users, userId);
+    } else {
+        userDetails.password = ''
     }
 
     const departmentFormattedForDropdown = departments.map(department => {

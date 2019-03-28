@@ -3,7 +3,7 @@ import TextInput from '../../common/form/Input';
 import PropTypes from "prop-types";
 import SelectInput from "../../common/form/Select";
 
-const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id, role_id}, onChange, onSave, errors, departments, roles}) => {
+const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id, role_id}, user, onChange, onSave, errors, departments, roles}) => {
     return (
         <form onSubmit={onSave}>
             <TextInput
@@ -59,14 +59,17 @@ const AddUserForm = ({user: {username, first_name, last_name, email, password, r
                 options={roles}
                 defaultOption="Select a Role"
                 onChange={onChange}/>
+            {
+                user.id ? null :
+                    <TextInput
+                        type='password'
+                        name='password'
+                        label="Password"
+                        value={password}
+                        error={errors.password}
+                        onChange={onChange}/>
+            }
 
-            <TextInput
-                type='password'
-                name='password'
-                label="Password"
-                value={password}
-                error={errors.password}
-                onChange={onChange}/>
 
             <button type="submit" className="btn btn-success">Submit User Data</button>
         </form>
