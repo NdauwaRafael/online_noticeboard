@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import AddUserForm from './partials/AddUserForm';
 import {bindActionCreators} from "redux";
-import {registerUser} from "../../Redux/actions/auth";
+import {addUser} from "../../Redux/actions/users";
 import {connect} from "react-redux";
 
 class AddUser extends Component {
@@ -37,11 +37,19 @@ class AddUser extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const {registrationErrors} = this.props;
-        if (prevProps.registrationErrors !== registrationErrors) {
-            if (registrationErrors.username || registrationErrors.email || registrationErrors.password || registrationErrors.first_name || registrationErrors.last_name) {
+        const {addUserErrors} = this.props;
+        if (prevProps.registrationErrors !== addUserErrors) {
+            if (addUserErrors.username ||
+                addUserErrors.email ||
+                addUserErrors.password ||
+                addUserErrors.first_name ||
+                addUserErrors.last_name ||
+                addUserErrors.bio ||
+                addUserErrors.registration_no ||
+                addUserErrors.role_id ||
+                addUserErrors.department_id) {
                 this.setState({
-                    errors: registrationErrors
+                    errors: addUserErrors
                 })
             }
         }
@@ -133,7 +141,7 @@ class AddUser extends Component {
     }
 };
 
-const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}}) => {
+const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}, roles: {roles}, users: {users, addUserErrors}}) => {
     const departmentFormattedForDropdown = departments.map(department => {
         return {
             value: department.id,
@@ -151,12 +159,13 @@ const mapStateToProps = ({auth: {registrationErrors}, departments: {departments}
     return {
         departments: departmentFormattedForDropdown,
         roles: rolesFormattedForDropdown,
-        registrationErrors
+        users,
+        addUserErrors
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        registerUser: bindActionCreators(registerUser, dispatch)
+        registerUser: bindActionCreators(addUser, dispatch)
     }
 };
 

@@ -8,7 +8,7 @@ import {
 const initialState = {
     loadingUsers: false,
     users: [],
-    addUserError: {}
+    addUserErrors: {}
 };
 
 export default (state = initialState, action) => {
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         case ADD_USER_FAILED:
             return {
                 ...state,
-                addUserError: action.error
+                addUserErrors: action.error
             };
 
         default:
