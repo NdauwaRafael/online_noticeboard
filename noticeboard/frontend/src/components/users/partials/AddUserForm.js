@@ -3,7 +3,7 @@ import TextInput from '../../common/form/Input';
 import PropTypes from "prop-types";
 import SelectInput from "../../common/form/Select";
 
-const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id, role_id}, onChange, onSave, errors, departments}) => {
+const AddUserForm = ({user: {username, first_name, last_name, email, password, registration_no, department_id, role_id}, onChange, onSave, errors, departments, roles}) => {
     return (
         <form onSubmit={onSave}>
             <TextInput
