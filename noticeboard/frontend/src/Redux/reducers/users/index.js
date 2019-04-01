@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 users: [
-                    state.users.filter(user => user.id !== action.user.id),
+                    ...state.users.filter(user => user.id !== action.user.id),
                     Object.assign({}, action.user)
                 ]
             };

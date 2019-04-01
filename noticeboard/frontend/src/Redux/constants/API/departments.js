@@ -5,7 +5,7 @@ export const addDepartmentApi = async (department, config) => {
 };
 
 export const updateDepartmentApi = async (department, config) => {
-    return axios.put('api/departments/', department, config);
+    return axios.put(`api/departments/${department.id}/`, department, config);
 };
 
 export const getDepartmentsApi = async (config) => {

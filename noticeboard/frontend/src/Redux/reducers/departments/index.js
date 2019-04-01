@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 departments: [
-                    state.departments.filter(department => department.id !== action.department.id),
+                    ...state.departments.filter(department => department.id !== action.department.id),
                     Object.assign({}, action.department)
                 ]
             };

@@ -27,6 +27,5 @@ class DepartmentViewSet(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             permission_classes = [permissions.IsAuthenticated]
         else:
-            permission_classes = [UserIsAdministrator, IsOwnerOrReadOnly]
-
+            permission_classes = [UserIsAdministrator]
         return [permission() for permission in permission_classes]
