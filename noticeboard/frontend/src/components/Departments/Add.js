@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import AddDepartmentForm from './partials/DepartmentsForm';
+import {bindActionCreators} from "redux";
+import {addDepartment} from '../../Redux/actions/departments'
 
 class Add extends Component {
     constructor(props) {
@@ -11,6 +13,17 @@ class Add extends Component {
             },
             errors: {
                 title: ''
+            }
+        }
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        const {addDepartmentErrors} = this.props;
+        if (nextProps.addDepartmentErrors === addDepartmentErrors) {
+            if (addDepartmentErrors.title || addDepartmentErrors.description) {
+                this.setState({
+                    errors: addDepartmentErrors
+                })
             }
         }
     }
@@ -37,7 +50,7 @@ class Add extends Component {
     onSave(e) {
         e.preventDefault();
         if (!this.departmentIsValid()) {
-            return ;
+            return;
         }
     }
 
@@ -55,10 +68,20 @@ class Add extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
+function mapStateToProps({departments: {departments, addDepartmentErrors}}) {
+    return {
+        departments,
+        addDepartmentErrors
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addDepartment: bindActionCreators(addDepartment, dispatch)
+    }
+};
 
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(Add);
