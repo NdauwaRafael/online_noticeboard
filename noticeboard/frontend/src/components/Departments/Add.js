@@ -52,6 +52,7 @@ class Add extends Component {
         if (!this.departmentIsValid()) {
             return;
         }
+        this.props.addDepartment(this.state.department)
     }
 
     render() {
