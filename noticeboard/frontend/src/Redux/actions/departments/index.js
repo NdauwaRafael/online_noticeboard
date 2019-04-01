@@ -2,7 +2,9 @@ import {
     GET_DEPARTMENTS_SUCCESS,
     GET_DEPARTMENTS_FAILED,
     ADD_DEPARTMENT_SUCCESS,
-    ADD_DEPARTMENT_FAILED
+    ADD_DEPARTMENT_FAILED,
+    DELETE_DEPARTMENT_SUCCESS,
+    DELETE_DEPARTMENT_FAILED
 } from '../../constants/actionTypes';
 
 import * as departmentsApi from '../../constants/API/departments';
@@ -67,5 +69,33 @@ export const addDepartment = (department) => (dispatch, getState) => {
                 return dispatch(getErrors('Department Add failed!'))
             }
 
+        })
+};
+
+//DELETE
+export const deleteDepartmentSuccess = (id)=>{
+    return {
+        type: DELETE_DEPARTMENT_SUCCESS,
+        id
+    }
+};
+
+export const deleteDepartmentFailed = (id)=>{
+    return {
+        type: DELETE_DEPARTMENT_FAILED,
+        id
+    }
+};
+
+export const deleteDepartment = (id)=>(dispatch, getState)=>{
+    departmentsApi.deleteDepartmentsApi(id, tokenConfig(getState))
+        .then(resp=>{
+            dispatch([
+                deleteDepartmentSuccess(id),
+                getMessages('Department Deleted Successfully!')
+            ])
+        })
+        .catch(error=>{
+            dispatch(getErrors('Department delete failed with error '+ error.toString()));
         })
 };
