@@ -28,7 +28,7 @@ return axios.post('api/posts/', post, config);
 };
 
 export const updatePostApi = async (post, config) => {
-return axios.post('api/posts/'+post.id, post, config);
+return axios.post(`api/posts/${post.id}/`, post, config);
 };
 
 export const getPosts = async (category, config) => {

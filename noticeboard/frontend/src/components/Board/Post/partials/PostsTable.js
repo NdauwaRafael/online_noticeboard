@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import {Link} from "react-router-dom";
 
 export default ({posts, auth: {user}, deletePost}) =>
     <table className="table">
@@ -22,8 +23,14 @@ export default ({posts, auth: {user}, deletePost}) =>
                         </button>
                         {
                             post.owner === user.id ?
-                                <button type="button" className="btn btn-outline-danger"
-                                        onClick={() => deletePost(post.id)}>Delete</button>
+                                <Fragment>
+                                    <Link to={'/posts/edit/'+post.id} style={{marginRight: 20}}
+                                            className="btn btn-outline-success">Edit
+                                    </Link>
+                                    < button type="button" className="btn btn-outline-danger"
+                                             onClick={() => deletePost(post.id)}>Delete
+                                    </button>
+                                </Fragment>
                                 : null
                         }
                     </td>

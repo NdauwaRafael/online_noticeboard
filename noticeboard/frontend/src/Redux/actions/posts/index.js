@@ -55,7 +55,7 @@ export const addPost = (post) => (dispatch, getState) => {
                 if (error.response) {
                     return dispatch([
                         updatePostFailed(error.response.data),
-                        getErrors(error.response.data.join())
+                        getErrors('Post Update failed!')
                     ])
                 } else {
                     return dispatch(getErrors(error.toString()));
