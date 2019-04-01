@@ -186,12 +186,14 @@ class PostForm extends Component {
     }
 }
 
-const departmentFormattedForDropdown = departments.map(department => {
-    return {
-        value: department.id,
-        text: department.title
-    };
-});
+const departmentFormattedForDropdown = (departments) => {
+    return departments.map(department => {
+        return {
+            value: department.id,
+            text: department.title
+        };
+    });
+}
 const getPostById = (posts, id) => {
     let post = posts.filter(post => parseInt(post.id) === parseInt(id));
     if (post.length > 0) {
@@ -217,7 +219,7 @@ const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {de
         errors,
         posts,
         user,
-        departments: departmentFormattedForDropdown,
+        departments: departmentFormattedForDropdown(departments),
         postDetails
     }
 };
