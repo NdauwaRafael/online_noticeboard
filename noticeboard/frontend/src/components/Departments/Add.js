@@ -16,7 +16,11 @@ class Add extends Component {
     }
 
     handleChange(event) {
-
+        let field = event.target.name;
+        let value = event.target.value;
+        let department = Object.assign({}, this.state.department);
+        department[field] = value;
+        return this.setState({department});
     }
 
     onSave(){
