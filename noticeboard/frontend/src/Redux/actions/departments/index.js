@@ -80,10 +80,10 @@ export const deleteDepartmentSuccess = (id)=>{
     }
 };
 
-export const deleteDepartmentFailed = (id)=>{
+export const deleteDepartmentFailed = (error)=>{
     return {
         type: DELETE_DEPARTMENT_FAILED,
-        id
+        error
     }
 };
 
