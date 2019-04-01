@@ -4,7 +4,9 @@ import {
     ADD_DEPARTMENT_SUCCESS,
     ADD_DEPARTMENT_FAILED,
     DELETE_DEPARTMENT_SUCCESS,
-    DELETE_DEPARTMENT_FAILED
+    DELETE_DEPARTMENT_FAILED,
+    UPDATE_DEPARTMENT_SUCCESS,
+    UPDATE_DEPARTMENT_FAILED
 } from '../../constants/actionTypes';
 
 import * as departmentsApi from '../../constants/API/departments';
@@ -36,6 +38,21 @@ export const getDepartments = () => (dispatch, getState) => {
         })
 };
 
+//UPDATE
+export const updateDepartmentSuccess = (resp) => {
+    return {
+        type: UPDATE_DEPARTMENT_SUCCESS,
+        department: resp
+    }
+};
+
+export const updateDepartmentFailed = (error) => {
+    return {
+        type: UPDATE_DEPARTMENT_FAILED,
+        error
+    }
+};
+
 //ADD
 export const addDepartmentSuccess = (resp) => {
     return {
@@ -52,50 +69,71 @@ export const addDepartmentFailed = (error) => {
 };
 
 export const addDepartment = (department) => (dispatch, getState) => {
-    departmentsApi.addDepartmentApi(department, tokenConfig(getState))
-        .then(resp => {
-            return dispatch([
-                addDepartmentSuccess(resp.data),
-                getMessages('Department Added successfully')
-            ])
-        })
-        .catch(error => {
-            if (error.response) {
+    if (department.id) {
+        departmentsApi.updateDepartmentApi(department, tokenConfig(getState))
+            .then(resp => {
                 return dispatch([
-                    addDepartmentFailed(error.response.data),
-                    getErrors('Department Add failed!')
+                    updateDepartmentSuccess(resp.data),
+                    getMessages('Department Updated successfully')
                 ])
-            } else {
-                return dispatch(getErrors('Department Add failed!'))
-            }
+            })
+            .catch(error => {
+                if (error.response) {
+                    return dispatch([
+                        updateDepartmentFailed(error.response.data),
+                        getErrors('Department Update failed!')
+                    ])
+                } else {
+                    return dispatch(getErrors('Department Update failed!'))
+                }
 
-        })
+            })
+    } else {
+        departmentsApi.addDepartmentApi(department, tokenConfig(getState))
+            .then(resp => {
+                return dispatch([
+                    addDepartmentSuccess(resp.data),
+                    getMessages('Department Added successfully')
+                ])
+            })
+            .catch(error => {
+                if (error.response) {
+                    return dispatch([
+                        addDepartmentFailed(error.response.data),
+                        getErrors('Department Add failed!')
+                    ])
+                } else {
+                    return dispatch(getErrors('Department Add failed!'))
+                }
+
+            })
+    }
 };
 
 //DELETE
-export const deleteDepartmentSuccess = (id)=>{
+export const deleteDepartmentSuccess = (id) => {
     return {
         type: DELETE_DEPARTMENT_SUCCESS,
         id
     }
 };
 
-export const deleteDepartmentFailed = (error)=>{
+export const deleteDepartmentFailed = (error) => {
     return {
         type: DELETE_DEPARTMENT_FAILED,
         error
     }
 };
 
-export const deleteDepartment = (id)=>(dispatch, getState)=>{
+export const deleteDepartment = (id) => (dispatch, getState) => {
     departmentsApi.deleteDepartmentsApi(id, tokenConfig(getState))
-        .then(resp=>{
+        .then(resp => {
             dispatch([
                 deleteDepartmentSuccess(id),
                 getMessages('Department Deleted Successfully!')
             ])
         })
-        .catch(error=>{
-            dispatch(getErrors('Department delete failed with error '+ error.toString()));
+        .catch(error => {
+            dispatch(getErrors('Department delete failed with error ' + error.toString()));
         })
 };
