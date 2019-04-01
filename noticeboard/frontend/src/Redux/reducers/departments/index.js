@@ -1,7 +1,12 @@
-import {GET_DEPARTMENTS_SUCCESS} from '../../constants/actionTypes';
+import {
+    GET_DEPARTMENTS_SUCCESS,
+    ADD_DEPARTMENT_SUCCESS,
+    ADD_DEPARTMENT_FAILED
+} from '../../constants/actionTypes';
 
 const initialState = {
-    departments: []
+    departments: [],
+    addDepartmentErrors: {}
 };
 
 export default (state = initialState, action) => {
@@ -10,6 +15,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 departments: action.departments
+            };
+        case ADD_DEPARTMENT_SUCCESS:
+            return {
+                ...state,
+                departments: [...state.departments, action.department]
+            };
+        case ADD_DEPARTMENT_FAILED:
+            return {
+                ...state,
+                addDepartmentErrors: action.error
             };
         default:
             return state;
