@@ -8,9 +8,7 @@ class Add extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            department: {
-                title: ''
-            },
+            department: Object.assign({}, this.props.departmentDetails),
             errors: {
                 title: ''
             }
@@ -19,9 +17,9 @@ class Add extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        const {addDepartmentErrors, departments} = this.props;
-        if (nextProps.addDepartmentErrors === addDepartmentErrors) {
+    componentWillUpdate(prevProps) {
+        const {addDepartmentErrors, departments, departmentDetails} = this.props;
+        if (prevProps.addDepartmentErrors === addDepartmentErrors) {
             if (addDepartmentErrors.title || addDepartmentErrors.description) {
                 this.setState({
                     errors: addDepartmentErrors
@@ -29,11 +27,17 @@ class Add extends Component {
             }
         }
 
-        if(nextProps.departments !== departments){
+        if (prevProps.departments !== departments) {
             this.setState({
                 department: {}
             });
             this.props.history.push('/departments');
+        }
+
+        if (prevProps.departmentDetails.id !== departmentDetails.id) {
+            this.setState({
+                user: Object.assign({}, departmentDetails)
+            })
         }
     }
 
@@ -51,8 +55,8 @@ class Add extends Component {
         if (title.length < 3) {
             errors.title = 'Department name is too short.';
             isValid = false;
-        }else {
-            errors.title=''
+        } else {
+            errors.title = ''
         }
         this.setState({errors});
 
@@ -81,10 +85,24 @@ class Add extends Component {
     }
 }
 
-function mapStateToProps({departments: {departments, addDepartmentErrors}}) {
+const getDepartmentByID = (departments, id) => {
+    let department = departments.filter(department => parseInt(department.id) === parseInt(id));
+    if (department.length > 0) {
+        return department[0]
+    }
+    return null;
+};
+
+function mapStateToProps(ownProps, {departments: {departments, addDepartmentErrors}}) {
+    let departmentDetails = {title: ''};
+    let deptId = ownProps.match.params.id;
+    if (deptId && departments.length > 0) {
+        departmentDetails = getDepartmentByID(departments, deptId);
+    }
     return {
         departments,
-        addDepartmentErrors
+        addDepartmentErrors,
+        departmentDetails
     };
 };
 
