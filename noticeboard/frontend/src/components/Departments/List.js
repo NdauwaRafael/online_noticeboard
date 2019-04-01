@@ -29,7 +29,9 @@ const mapDispatchToProps = (dispatch)=>{
     return {
         deleteDepartment: bindActionCreators(deleteDepartment , dispatch)
     }
-}
+};
+
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(List);
