@@ -17,6 +17,7 @@ import ManageUsers from '../components/users/MangeUsers';
 
 //DEPARTMENTS
 import AddDepartment from '../components/Departments/Add';
+import ListDepartments from '../components/Departments/List'
 
 
 //PRIVATE ROUTE
@@ -33,6 +34,8 @@ export default (
         <AdminRoute path='/user/add'  exact component={AddUser}/>
         <AdminRoute path='/user/:id'  exact component={AddUser}/>
         <AdminRoute path='/departments/add'  exact component={AddDepartment}/>
+        <AdminRoute path='/departments/:id'  exact component={AddDepartment}/>
+        <AdminRoute path='/departments'  exact component={ListDepartments}/>
         <PrivateRoute path='/users'  exact component={ManageUsers}/>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
