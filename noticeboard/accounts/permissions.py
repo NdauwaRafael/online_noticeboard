@@ -1,7 +1,6 @@
 from rest_framework import permissions
 from roles.serializers import RoleSerializer
 from accounts.serializers import UserSerializer
-from departments.serializers import DepartmentSerializer
 
 
 class UserIsStudentLeader(permissions.BasePermission):
