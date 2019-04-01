@@ -28,7 +28,7 @@ function DepartmentsTable({user, departments, deleteDepartment}) {
                             {
                                 user.role === 'Administrator' ?
                                     <td style={{display: 'flex', justifyContent: 'space-between'}}>
-                                        <Link to={"/department/" + department.id} type="button" style={{marginRight: 20}}
+                                        <Link to={"/departments/" + department.id} type="button" style={{marginRight: 20}}
                                               className="btn btn-outline-success">Edit
                                         </Link>
                                         <button type="button" className="btn btn-outline-danger"

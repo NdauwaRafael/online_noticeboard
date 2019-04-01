@@ -20,6 +20,7 @@ class List extends Component {
 }
 
 function mapStateToProps({auth: {user}, departments: {departments}}) {
+    console.log(departments)
     return {
         user,
         departments
