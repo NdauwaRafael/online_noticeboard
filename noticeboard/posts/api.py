@@ -2,8 +2,7 @@ from rest_framework import viewsets, permissions
 from .serializers import PostSerializer
 from accounts.serializers import UserSerializer
 from .models import Post
-from accounts.permissions import UserIsStudentLeader, UserIsHOD, UserIsAdministrator, CanPublishPublic, \
-    IsOwnerOrReadOnly
+from accounts.permissions import UserIsStudentLeader, UserIsHOD, UserIsAdministrator, CanPublishPublic, IsOwnerOrReadOnly
 
 
 # Public posts

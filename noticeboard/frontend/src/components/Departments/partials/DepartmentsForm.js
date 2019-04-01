@@ -10,7 +10,7 @@ DepartmentsForm.propTypes = {
     errors: PropTypes.object.isRequired
 };
 
-function DepartmentsForm({onSave, onChange, department: {title}, description, errors}) {
+function DepartmentsForm({onSave, onChange, department: {title, description}, errors}) {
     return (
         <Fragment>
             <form onSubmit={onSave}>
