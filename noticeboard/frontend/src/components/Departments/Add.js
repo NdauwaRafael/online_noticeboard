@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 
 class Add extends Component {
     render() {
         return (
-            <div>
+            <Fragment>
                 
-            </div>
+            </Fragment>
         );
     }
 }

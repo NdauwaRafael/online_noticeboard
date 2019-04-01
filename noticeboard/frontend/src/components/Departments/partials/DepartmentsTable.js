@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 DepartmentsTable.propTypes = {
@@ -7,9 +7,9 @@ DepartmentsTable.propTypes = {
 
 function DepartmentsTable(props) {
     return (
-        <div>
+        <Fragment>
 
-        </div>
+        </Fragment>
     );
 }
 

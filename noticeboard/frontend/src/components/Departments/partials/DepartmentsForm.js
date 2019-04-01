@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 DepartmentsForm.propTypes = {
@@ -7,9 +7,9 @@ DepartmentsForm.propTypes = {
 
 function DepartmentsForm(props) {
     return (
-        <div>
+        <Fragment>
 
-        </div>
+        </Fragment>
     );
 }
 
