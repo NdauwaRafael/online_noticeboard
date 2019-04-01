@@ -94,7 +94,8 @@ const getDepartmentByID = (departments, id) => {
     return null;
 };
 const usersFormattedForDropdown = (users) => {
-    return users.map(user => {
+    let hodUsers = users.filter(user=>user.role==='HOD');
+    return hodUsers.map(user => {
         return {
             value: user.id,
             text: `${user.first_name} ${user.last_name}`

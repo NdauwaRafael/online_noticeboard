@@ -3,8 +3,13 @@ import {connect} from 'react-redux';
 import DepartmentsTable from './partials/DepartmentsTable';
 import {bindActionCreators} from "redux";
 import {deleteDepartment} from '../../Redux/actions/departments';
+import {getUsers} from "../../Redux/actions/users";
 
 class List extends Component {
+    componentDidMount() {
+        this.props.getUsers();
+    }
+
     render() {
         const {departments, user, deleteDepartment} = this.props;
         return (
@@ -25,9 +30,11 @@ function mapStateToProps({auth: {user}, departments: {departments}}) {
         departments
     };
 }
-const mapDispatchToProps = (dispatch)=>{
+
+const mapDispatchToProps = (dispatch) => {
     return {
-        deleteDepartment: bindActionCreators(deleteDepartment , dispatch)
+        deleteDepartment: bindActionCreators(deleteDepartment, dispatch),
+        getUsers: bindActionCreators(getUsers, dispatch)
     }
 };
 

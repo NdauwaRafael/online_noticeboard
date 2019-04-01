@@ -22,10 +22,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
+    department = serializers.ReadOnlyField(source='department_id.title', read_only=True, allow_null=True)
+    role = serializers.ReadOnlyField(source='role_id.role')
+
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                  'registration_no', 'department_id', 'role_id', 'bio', 'owner', 'password')
+                  'registration_no', 'department_id', 'role_id', 'bio', 'owner', 'password', 'role', 'department')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
