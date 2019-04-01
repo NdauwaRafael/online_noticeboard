@@ -32,7 +32,7 @@ export default (
         <EditorRoute path="/addpost" exact component={AddPost} />
         <AdminRoute path='/user/add'  exact component={AddUser}/>
         <AdminRoute path='/user/:id'  exact component={AddUser}/>
-        <AdminRoute path='/department/add'  exact component={AddDepartment}/>
+        <AdminRoute path='/departments/add'  exact component={AddDepartment}/>
         <PrivateRoute path='/users'  exact component={ManageUsers}/>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />

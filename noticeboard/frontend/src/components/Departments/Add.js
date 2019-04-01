@@ -14,17 +14,26 @@ class Add extends Component {
             errors: {
                 title: ''
             }
-        }
+        };
+        this.onSave = this.onSave.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {
-        const {addDepartmentErrors} = this.props;
+        const {addDepartmentErrors, departments} = this.props;
         if (nextProps.addDepartmentErrors === addDepartmentErrors) {
             if (addDepartmentErrors.title || addDepartmentErrors.description) {
                 this.setState({
                     errors: addDepartmentErrors
                 })
             }
+        }
+
+        if(nextProps.departments !== departments){
+            this.setState({
+                department: {}
+            });
+            this.props.history.push('/departments');
         }
     }
 
@@ -40,7 +49,10 @@ class Add extends Component {
         let {department: {title}, errors} = this.state;
         let isValid = true;
         if (title.length < 3) {
-            errors.title = 'Department name is too short.'
+            errors.title = 'Department name is too short.';
+            isValid = false;
+        }else {
+            errors.title=''
         }
         this.setState({errors});
 
