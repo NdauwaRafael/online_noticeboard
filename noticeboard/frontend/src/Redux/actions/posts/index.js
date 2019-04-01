@@ -3,14 +3,30 @@ import {
     GET_POSTS_FAILED,
     ADD_POST_SUCCESS,
     ADD_POST_FAILED,
+    UPDATE_POST_SUCCESS,
+    UPDATE_POST_FAILED,
     DELETE_POST_SUCCESS,
     DELETE_POST_FAILED,
+
 } from '../../constants/actionTypes';
 import * as postApi from '../../constants/API/posts';
 import {getMessages, getErrors} from '../messages';
 import {tokenConfig} from '../auth'
 
+//UPDATE POST
+export const updatePostSuccess = (resp) => {
+    return {
+        type: UPDATE_POST_SUCCESS,
+        post: resp
+    }
+};
 
+export const updatePostFailed = (resp) => {
+    return {
+        type: UPDATE_POST_FAILED,
+        errors: resp
+    }
+};
 //CREATE POST
 export const addPostSuccess = (resp) => {
     return {
@@ -27,23 +43,43 @@ export const addPostFailed = (resp) => {
 };
 
 export const addPost = (post) => (dispatch, getState) => {
-    postApi.addPostApi(post, tokenConfig(getState))
-        .then(resp => {
-            return dispatch([
-                addPostSuccess(resp.data),
-                getMessages('Post was added successfully')
-            ])
-        })
-        .catch(error => {
-            if (error.response) {
+    if (post.id) {
+        postApi.updatePostApi(post, tokenConfig(getState))
+            .then(resp => {
                 return dispatch([
-                    addPostFailed(error.response.data),
-                    getErrors(error.response.data.join())
+                    updatePostSuccess(resp.data),
+                    getMessages('Post was added successfully')
                 ])
-            } else {
-                return dispatch(getErrors(error.toString()));
-            }
-        })
+            })
+            .catch(error => {
+                if (error.response) {
+                    return dispatch([
+                        updatePostFailed(error.response.data),
+                        getErrors(error.response.data.join())
+                    ])
+                } else {
+                    return dispatch(getErrors(error.toString()));
+                }
+            })
+    } else {
+        postApi.addPostApi(post, tokenConfig(getState))
+            .then(resp => {
+                return dispatch([
+                    addPostSuccess(resp.data),
+                    getMessages('Post was added successfully')
+                ])
+            })
+            .catch(error => {
+                if (error.response) {
+                    return dispatch([
+                        addPostFailed(error.response.data),
+                        getErrors(error.response.data.join())
+                    ])
+                } else {
+                    return dispatch(getErrors(error.toString()));
+                }
+            })
+    }
 }
 
 //GET POSTs

@@ -27,6 +27,10 @@ export const addPostApi = async (post, config) => {
 return axios.post('api/posts/', post, config);
 };
 
+export const updatePostApi = async (post, config) => {
+return axios.post('api/posts/'+post.id, post, config);
+};
+
 export const getPosts = async (category, config) => {
     if(category !== 'public'){
         return axios.get('api/posts?category='+category, config)
