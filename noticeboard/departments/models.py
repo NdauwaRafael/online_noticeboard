@@ -8,5 +8,5 @@ class Department(models.Model):
     description = models.TextField(max_length=400, null=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="departments", on_delete=models.CASCADE, null=True,
                               blank=True)
-    hod_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="hod_departments", on_delete=models.CASCADE,
-                               null=True, blank=True)
+    hod_id = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="hod_departments", on_delete=models.CASCADE,
+                                  null=True, blank=True)
