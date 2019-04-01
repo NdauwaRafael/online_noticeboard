@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import TextInput from '../../common/form/Input';
 import PropTypes from "prop-types";
 import Textarea from "../../common/form/Textarea";
+import Select from "../../common/form/Select";
 
 DepartmentsForm.propTypes = {
     onSave: PropTypes.func.isRequired,
@@ -10,7 +11,7 @@ DepartmentsForm.propTypes = {
     errors: PropTypes.object.isRequired
 };
 
-function DepartmentsForm({onSave, onChange, department: {title, description}, errors}) {
+function DepartmentsForm({onSave, onChange, department, department: {title, description, hod_id}, errors, userList}) {
     return (
         <Fragment>
             <form onSubmit={onSave}>
@@ -21,6 +22,18 @@ function DepartmentsForm({onSave, onChange, department: {title, description}, er
                     value={title}
                     error={errors.title}
                     onChange={onChange}/>
+
+                {department.id ?
+                    <Select
+                     label="Assign a HOD"
+                     name="hod_id"
+                     value={hod_id}
+                     error={errors.hod_id}
+                     defaultOption="Select A User"
+                     options={userList}
+                     onChange={onChange}/>
+                    :null
+                }
 
                 <Textarea
                     name="description"

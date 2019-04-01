@@ -79,6 +79,7 @@ class Add extends Component {
                     errors={errors}
                     onChange={this.handleChange}
                     department={department}
+                    userList={this.props.userList}
                     onSave={this.onSave}/>
             </Fragment>
         );
@@ -92,8 +93,16 @@ const getDepartmentByID = (departments, id) => {
     }
     return null;
 };
+const usersFormattedForDropdown = (users) => {
+    return users.map(user => {
+        return {
+            value: user.id,
+            text: `${user.first_name} ${user.last_name}`
+        };
+    });
+}
 
-function mapStateToProps({departments: {departments, addDepartmentErrors}}, ownProps) {
+function mapStateToProps({departments: {departments, addDepartmentErrors}, users: {users}}, ownProps) {
     let departmentDetails = {title: ''};
     let deptId = ownProps.match.params.id;
     if (deptId && departments.length > 0) {
@@ -102,7 +111,8 @@ function mapStateToProps({departments: {departments, addDepartmentErrors}}, ownP
     return {
         departments,
         addDepartmentErrors,
-        departmentDetails
+        departmentDetails,
+        userList: usersFormattedForDropdown(users)
     };
 };
 
