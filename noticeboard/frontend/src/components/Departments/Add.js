@@ -93,7 +93,7 @@ const getDepartmentByID = (departments, id) => {
     return null;
 };
 
-function mapStateToProps(ownProps, {departments: {departments, addDepartmentErrors}}) {
+function mapStateToProps({departments: {departments, addDepartmentErrors}}, ownProps) {
     let departmentDetails = {title: ''};
     let deptId = ownProps.match.params.id;
     if (deptId && departments.length > 0) {
