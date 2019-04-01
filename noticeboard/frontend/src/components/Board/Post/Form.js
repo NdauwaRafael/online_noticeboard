@@ -39,10 +39,13 @@ class PostForm extends Component {
             })
         }
 
-        if (prevProps.posts !== posts) this.setState({
-            title: '',
-            description: ''
-        });
+        if (prevProps.posts !== posts) {
+            this.setState({
+                title: '',
+                description: ''
+            });
+            this.props.history.push('/');
+        }
 
         if (prevProps.user !== user) {
             this.updateUser(user);
