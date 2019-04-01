@@ -15,6 +15,10 @@ import DepartmentalPosts from '../components/Board/Post/DepartmentalPosts';
 import AddUser from '../components/users/AddUser';
 import ManageUsers from '../components/users/MangeUsers';
 
+//DEPARTMENTS
+import AddDepartment from '../components/Departments/Add';
+
+
 //PRIVATE ROUTE
 import PrivateRoute from './PrivateRoute';
 import EditorRoute from './EditorRoute';
@@ -28,6 +32,7 @@ export default (
         <EditorRoute path="/addpost" exact component={AddPost} />
         <AdminRoute path='/user/add'  exact component={AddUser}/>
         <AdminRoute path='/user/:id'  exact component={AddUser}/>
+        <AdminRoute path='/department/add'  exact component={AddDepartment}/>
         <PrivateRoute path='/users'  exact component={ManageUsers}/>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
