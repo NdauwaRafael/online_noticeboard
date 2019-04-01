@@ -6,11 +6,11 @@ import Textarea from "../../common/form/Textarea";
 DepartmentsForm.propTypes = {
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
+    department: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 
-function DepartmentsForm({onSave, onChange, title, description, errors}) {
+function DepartmentsForm({onSave, onChange, department: {title}, description, errors}) {
     return (
         <Fragment>
             <form onSubmit={onSave}>
