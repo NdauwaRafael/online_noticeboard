@@ -12,9 +12,7 @@ class PostForm extends Component {
         super(props);
 
         this.state = {
-            title: '',
-            description: '',
-            category: '',
+            post: Object.assign({}, this.props.postDetails),
             errors: {
                 title: '',
                 description: '',
@@ -34,7 +32,7 @@ class PostForm extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const {errors, posts, user} = this.props;
+        const {errors, posts, user, postDetails} = this.props;
         if (prevProps.errors !== errors) {
             this.setState({
                 errors
@@ -50,10 +48,16 @@ class PostForm extends Component {
             this.updateUser(user);
         }
 
+        if (prevProps.postDetails.id !== postDetails.id) {
+            this.setState({
+                post: Object.assign({}, postDetails)
+            })
+        }
+
     }
 
     updateUser(user) {
-        if ( user.role === 'HOD') {
+        if (user.role === 'HOD') {
             this.setState({
                 isAdmin: true
             })
@@ -65,13 +69,16 @@ class PostForm extends Component {
     }
 
     handleChange(event) {
+
         let field = event.target.name;
         let value = event.target.value;
-        return this.setState({[field]: value});
+        let post = Object.assign({}, this.state.post);
+        post[field] = value;
+        return this.setState({post});
     };
 
     postIsValid() {
-        let {title, description, category, errors} = this.state;
+        let {post: {title, description, category}, errors} = this.state;
         let isValid = true;
 
         if (title.length <= 3) {
@@ -106,17 +113,13 @@ class PostForm extends Component {
         if (!this.postIsValid()) {
             return;
         }
-        let post = {
-            title: this.state.title,
-            category: this.state.category,
-            description: this.state.description
-        };
 
-        this.props.savePost(post);
+
+        this.props.savePost(this.state.post);
     }
 
     render() {
-        const {title, description, errors, category, isAdmin, department} = this.state;
+        const {post: {title, description, category, department}, errors, isAdmin} = this.state;
         const {departments} = this.props;
         const categoryOptions = [
             {
@@ -183,24 +186,39 @@ class PostForm extends Component {
     }
 }
 
+const departmentFormattedForDropdown = departments.map(department => {
+    return {
+        value: department.id,
+        text: department.title
+    };
+});
+const getPostById = (posts, id) => {
+    let post = posts.filter(post => parseInt(post.id) === parseInt(id));
+    if (post.length > 0) {
+        return post[0]
+    }
+    return null;
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         savePost: bindActionCreators(addPost, dispatch)
     }
-}
+};
 
-const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {departments}}) => {
-        const departmentFormattedForDropdown = departments.map(department => {
-        return {
-            value: department.id,
-            text: department.title
-        };
-    });
+const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {departments}}, ownProps) => {
+
+    let postId = ownProps.match.params.id;
+    let postDetails = {title: '', description: '', category: ''};
+    if (postId && posts.posts.length > 0) {
+        postDetails = getPostById(posts.posts, postId);
+    }
     return {
         errors,
         posts,
         user,
-        departments: departmentFormattedForDropdown
+        departments: departmentFormattedForDropdown,
+        postDetails
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
