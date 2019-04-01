@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import AddDepartmentForm from './partials/DepartmentsForm';
 
 class Add extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             department: {
@@ -23,17 +23,32 @@ class Add extends Component {
         return this.setState({department});
     }
 
-    onSave(){
+    departmentIsValid() {
+        let {department: {title}, errors} = this.state;
+        let isValid = true;
+        if (title.length < 3) {
+            errors.title = 'Department name is too short.'
+        }
+        this.setState({errors});
 
+        return isValid;
     }
+
+    onSave(e) {
+        e.preventDefault();
+        if (!this.departmentIsValid()) {
+            return ;
+        }
+    }
+
     render() {
-        const { department, errors } = this.state;
+        const {department, errors} = this.state;
         return (
             <Fragment>
                 <AddDepartmentForm
                     errors={errors}
                     onChange={this.handleChange}
-                    department = {department}
+                    department={department}
                     onSave={this.onSave}/>
             </Fragment>
         );
