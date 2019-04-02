@@ -26,9 +26,8 @@ class PostViewSet(viewsets.ModelViewSet):
         with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
             post_email_message = msg.read()
         subject = 'Online Noticeboard Notice'
-        print (self.request.user)
         to_email = (UserSerializer(self.request.user).data['email'],)
-        from_email = settings.EMAIL_HOST_USER
+        from_email = 'ONAP: <no-reply@onlinenoticeboard.com>'
         message = EmailMultiAlternatives(subject=subject, body=post_email_message, from_email=from_email, to=to_email)
         html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
         message.attach_alternative(html_template, "text/html")
