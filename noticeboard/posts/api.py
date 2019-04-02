@@ -23,6 +23,26 @@ class PostViewSet(viewsets.ModelViewSet):
             return queryset.filter(category='public')
 
     def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+        if self.request.data['send_mail'] == 'send_mail':
+            with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
+                post_email_message = msg.read()
+            subject = 'Online Noticeboard Notice'
+            to_email = (UserSerializer(self.request.user).data['email'],)
+            from_email = 'ONAP: <no-reply@onlinenoticeboard.com>'
+            message = EmailMultiAlternatives(subject=subject, body=post_email_message, from_email=from_email,
+                                             to=to_email)
+            html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
+            message.attach_alternative(html_template, "text/html")
+            message.send()
+
+    def perform_update(self, serializer, **kwargs):
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        instance.delete()
+
+    def send_post_email(self):
         with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
             post_email_message = msg.read()
         subject = 'Online Noticeboard Notice'
@@ -32,13 +52,6 @@ class PostViewSet(viewsets.ModelViewSet):
         html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
         message.attach_alternative(html_template, "text/html")
         message.send()
-        serializer.save(owner=self.request.user)
-
-    def perform_update(self, serializer, **kwargs):
-        serializer.save()
-
-    def perform_destroy(self, instance):
-        instance.delete()
 
     def get_permissions(self):
         if self.request.method == 'GET':
