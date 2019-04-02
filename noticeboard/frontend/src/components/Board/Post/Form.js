@@ -39,7 +39,7 @@ class PostForm extends Component {
             })
         }
 
-        if (prevProps.posts !== posts) {
+        if (prevProps.posts.posts !== posts.posts) {
             this.setState({
                 title: '',
                 description: ''
@@ -67,6 +67,11 @@ class PostForm extends Component {
         } else {
             this.setState({
                 isAdmin: false
+            });
+            let post = Object.assign({}, this.state.post);
+            post.category = 'public';
+            this.setState({
+                post
             })
         }
     }
@@ -116,7 +121,6 @@ class PostForm extends Component {
         if (!this.postIsValid()) {
             return;
         }
-
 
         this.props.savePost(this.state.post);
     }

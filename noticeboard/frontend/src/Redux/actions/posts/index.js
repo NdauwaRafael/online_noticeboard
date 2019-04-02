@@ -71,10 +71,14 @@ export const addPost = (post) => (dispatch, getState) => {
             })
             .catch(error => {
                 if (error.response) {
-                    return dispatch([
-                        addPostFailed(error.response.data),
-                        getErrors(error.response.data.join())
-                    ])
+                    if (error.response.data.detail) {
+                        return dispatch([
+                            addPostFailed(error.response.data),
+                            getErrors(error.response.data.detail)])
+                    }
+                    return dispatch(
+                        addPostFailed(error.response.data))
+
                 } else {
                     return dispatch(getErrors(error.toString()));
                 }
