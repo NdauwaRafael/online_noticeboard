@@ -1,7 +1,8 @@
 from .models import Department
 from rest_framework import viewsets, permissions
 from .serializers import DepartmentSerializer
-from accounts.permissions import  UserIsAdministrator, IsOwnerOrReadOnly
+from accounts.permissions import UserIsAdministrator, IsOwnerOrReadOnly
+
 
 # Role View Set
 class DepartmentViewSet(viewsets.ModelViewSet):
