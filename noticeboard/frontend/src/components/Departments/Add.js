@@ -19,7 +19,7 @@ class Add extends Component {
 
     componentWillUpdate(prevProps) {
         const {addDepartmentErrors, departments, departmentDetails} = this.props;
-        if (prevProps.addDepartmentErrors === addDepartmentErrors) {
+        if (prevProps.addDepartmentErrors !== addDepartmentErrors) {
             if (addDepartmentErrors.title || addDepartmentErrors.description || addDepartmentErrors.hod_id) {
                 this.setState({
                     errors: addDepartmentErrors

@@ -81,7 +81,7 @@ class PostForm extends Component {
     };
 
     postIsValid() {
-        let {post: {title, description, category}, errors} = this.state;
+        let {post: {title, description, category}, errors, isAdmin} = this.state;
         let isValid = true;
 
         if (title.length <= 3) {
@@ -91,7 +91,7 @@ class PostForm extends Component {
             errors.title = ''
         }
 
-        if (category.length <= 3) {
+        if (category.length <= 3 && isAdmin) {
             errors.category = 'Post category must not be empty';
             isValid = false;
         } else {
