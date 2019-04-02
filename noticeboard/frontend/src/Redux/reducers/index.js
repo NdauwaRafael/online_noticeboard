@@ -6,6 +6,7 @@ import auth from './auth'
 import departments from './departments';
 import roles from './roles';
 import users from './users';
+import loaders from './loaders'
 
 export default combineReducers({
     posts,
@@ -14,5 +15,6 @@ export default combineReducers({
     auth,
     departments,
     roles,
-    users
+    users,
+    loaders
 })

@@ -5,11 +5,12 @@ import HeaderGuest from './partials/HeaderGuest';
 import HeaderAuthenticated from './partials/HeaderAuthenticated'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 class Header extends Component {
     render() {
         const { isAuthenticated, auth: {user}, auth } = this.props;
         return (
-            <div className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+            <div key="topbar" className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
                 <div className="container">
                     <Link to='/' className="navbar-brand">NoticeBoard</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -27,16 +28,17 @@ class Header extends Component {
 
                 </div>
             </div>
-        )
+    )
     }
 }
 const mapDispatchToProps = (dispatch) => ({
     logoutUser: bindActionCreators(logoutUser, dispatch)
 })
-const mapStateToProps = ({ auth: { isAuthenticated }, auth }) => {
+const mapStateToProps = ({ auth: { isAuthenticated }, auth, loaders: {loading} }) => {
     return {
         isAuthenticated,
-        auth
+        auth,
+        loading
     }
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

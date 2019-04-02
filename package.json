@@ -47,10 +47,12 @@
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
+    "react-spinners-kit": "^1.9.0",
     "react-transition-group": "^2.7.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-multi": "^0.1.12",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.0"
   }
 }
