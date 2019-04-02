@@ -6,6 +6,7 @@ from accounts.permissions import UserIsStudentLeader, UserIsHOD, UserIsAdministr
     IsOwnerOrReadOnly
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import get_template
+from django.template import Context
 from django.conf import settings
 
 
@@ -27,11 +28,12 @@ class PostViewSet(viewsets.ModelViewSet):
         if self.request.data['send_mail'] == 'send_mail':
             with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
                 post_email_message = msg.read()
-            subject = 'Online Noticeboard Notice'
+            subject = 'POST: ' + self.request.data['title']
             to_email = (UserSerializer(self.request.user).data['email'],)
             from_email = 'ONAP: <no-reply@onlinenoticeboard.com>'
             message = EmailMultiAlternatives(subject=subject, body=post_email_message, from_email=from_email,
                                              to=to_email)
+            message_body = Context({'body': self.request.data['description'], 'title': self.request.data['title']})
             html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
             message.attach_alternative(html_template, "text/html")
             message.send()
@@ -42,16 +44,17 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_destroy(self, instance):
         instance.delete()
 
-    def send_post_email(self):
-        with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
-            post_email_message = msg.read()
-        subject = 'Online Noticeboard Notice'
-        to_email = (UserSerializer(self.request.user).data['email'],)
-        from_email = 'ONAP: <no-reply@onlinenoticeboard.com>'
-        message = EmailMultiAlternatives(subject=subject, body=post_email_message, from_email=from_email, to=to_email)
-        html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
-        message.attach_alternative(html_template, "text/html")
-        message.send()
+    # def send_post_email(self):
+    #     with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
+    #         post_email_message = msg.read()
+    #     subject = 'Online Noticeboard Notice'
+    #     to_email = (UserSerializer(self.request.user).data['email'],)
+    #     from_email = 'ONAP: <no-reply@onlinenoticeboard.com>'
+    #     message = EmailMultiAlternatives(subject=subject, body=post_email_message, from_email=from_email, to=to_email)
+    #     data =
+    #     html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
+    #     message.attach_alternative(html_template, "text/html")
+    #     message.send()
 
     def get_permissions(self):
         if self.request.method == 'GET':
