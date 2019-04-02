@@ -18,8 +18,7 @@ class PostForm extends Component {
                 title: '',
                 description: '',
                 category: '',
-                department: '',
-                send_mail: ''
+                department: ''
             },
             isAdmin: false
         };
@@ -189,8 +188,8 @@ class PostForm extends Component {
 
                     <Checkbox name="send_mail"
                               label="Send Email Notification for this post"
-                              value={send_mail}
-                              error={errors.send_mail}
+                              value='send_mail'
+                              error=''
                               onChange={this.handleChange}/>
 
                     <button type="submit" className="btn btn-primary">Submit</button>
@@ -226,7 +225,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {departments}}, ownProps) => {
 
     let postId = ownProps.match.params.id;
-    let postDetails = {title: '', description: '', category: ''};
+    let postDetails = {title: '', description: '', category: '', send_mail:''};
     if (postId && posts.posts.length > 0) {
         postDetails = getPostById(posts.posts, postId);
     }
