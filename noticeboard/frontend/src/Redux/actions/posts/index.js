@@ -7,6 +7,8 @@ import {
     UPDATE_POST_FAILED,
     DELETE_POST_SUCCESS,
     DELETE_POST_FAILED,
+    START_LOADING,
+    FINISH_LOADING
 
 } from '../../constants/actionTypes';
 import * as postApi from '../../constants/API/posts';
@@ -43,10 +45,12 @@ export const addPostFailed = (resp) => {
 };
 
 export const addPost = (post) => (dispatch, getState) => {
+    dispatch({type: START_LOADING});
     if (post.id) {
         postApi.updatePostApi(post, tokenConfig(getState))
             .then(resp => {
                 return dispatch([
+                    {type: FINISH_LOADING},
                     updatePostSuccess(resp.data),
                     getMessages('Post was added successfully')
                 ])
@@ -54,6 +58,7 @@ export const addPost = (post) => (dispatch, getState) => {
             .catch(error => {
                 if (error.response) {
                     return dispatch([
+                        {type: FINISH_LOADING},
                         updatePostFailed(error.response.data),
                         getErrors('Post Update failed!')
                     ])
@@ -65,6 +70,7 @@ export const addPost = (post) => (dispatch, getState) => {
         postApi.addPostApi(post, tokenConfig(getState))
             .then(resp => {
                 return dispatch([
+                    {type: FINISH_LOADING},
                     addPostSuccess(resp.data),
                     getMessages('Post was added successfully')
                 ])
@@ -73,14 +79,19 @@ export const addPost = (post) => (dispatch, getState) => {
                 if (error.response) {
                     if (error.response.data.detail) {
                         return dispatch([
+                            {type: FINISH_LOADING},
                             addPostFailed(error.response.data),
                             getErrors(error.response.data.detail)])
                     }
-                    return dispatch(
-                        addPostFailed(error.response.data))
+                    return dispatch([
+                        {type: FINISH_LOADING},
+                        addPostFailed(error.response.data)])
 
                 } else {
-                    return dispatch(getErrors(error.toString()));
+                    return dispatch([
+                        {type: FINISH_LOADING},
+                        getErrors(error.toString())
+                    ]);
                 }
             })
     }

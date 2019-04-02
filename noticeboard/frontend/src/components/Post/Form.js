@@ -7,7 +7,8 @@ import {connect} from 'react-redux';
 import {addPost} from '../../Redux/actions/posts';
 import {bindActionCreators} from 'redux';
 import {Link} from "react-router-dom";
-import { ClapSpinner } from "react-spinners-kit";
+import {ClapSpinner} from "react-spinners-kit";
+
 class PostForm extends Component {
     constructor(props) {
         super(props);
@@ -194,20 +195,25 @@ class PostForm extends Component {
 
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
-                <div className="nb_loading" style={{
-                    position: "absolute",
-                    zIndex: "200",
-                    background: "rgba(255, 255, 255, .9)",
-                    top: 0,
-                    right: 0,
-                    left: 0,
-                    bottom: 0,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>
-                    <ClapSpinner key={"loader"} size={30} color="#686769" loading={this.props.loading} />
-                </div>
+                {
+                    this.props.loading ?
+                        <div className="nb_loading" style={{
+                            position: "absolute",
+                            zIndex: "200",
+                            background: "rgba(255, 255, 255, .9)",
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
+                            <ClapSpinner key={"loader"} size={30} color="#686769" loading={true}/>
+                        </div>
+                        : null
+                }
+
             </Fragment>
         )
     }
@@ -238,7 +244,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {departments}, loaders: {loading}}, ownProps) => {
 
     let postId = ownProps.match.params.id;
-    let postDetails = {title: '', description: '', category: '', send_mail:''};
+    let postDetails = {title: '', description: '', category: '', send_mail: ''};
     if (postId && posts.posts.length > 0) {
         postDetails = getPostById(posts.posts, postId);
     }
