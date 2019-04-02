@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     'departments',
-    'categories',
-    'mail_templated'
+    'categories'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
