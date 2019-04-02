@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'accounts',
     'departments',
     'categories',
-    'rolepermissions',
+    'mail_templated'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
@@ -52,7 +52,10 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'accounts.User'
 
-ROLEPERMISSIONS_MODULE = 'noticeboard.roles'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '391759765e9b4e'
+EMAIL_HOST_PASSWORD = 'adef7317a8d584'
+EMAIL_PORT = '2525'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
