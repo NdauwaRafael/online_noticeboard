@@ -29,8 +29,7 @@ class UserIsAdministrator(permissions.BasePermission):
         user = UserSerializer(request.user)
         role = user.data['role']
         id = user.data['id']
-        print('user id is: ' + id)
-        if role == 'Administrator' or id == 1:
+        if role == 'Administrator' or id == '1':
             return True
         else:
             return False
