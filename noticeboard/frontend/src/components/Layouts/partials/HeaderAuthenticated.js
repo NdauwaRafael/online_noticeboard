@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 export default ({logoutUser, auth: {user}, Fragment}) => {
-    let canAddPost = user.role === 'Administrator' || user.role === 'HOD' || user.role === 'student_leader';
+    let canAddPost = user.role === 'Administrator' || user.role === 'HOD' || user.role === 'student_leader' || parseInt(user.id)===1;
     return (
         <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav">
@@ -43,7 +43,7 @@ export default ({logoutUser, auth: {user}, Fragment}) => {
                                 <div className="dropdown-divider"/>
                                 <Link to="/addpost"
                                       className="dropdown-item">Add a post</Link>
-                                {user.role === 'Administrator' ?
+                                {user.role === 'Administrator' || parseInt(user.id)===1?
                                     <Fragment>
                                         <div className="dropdown-divider"/>
                                         <Link className="dropdown-item" to="/user/add"
