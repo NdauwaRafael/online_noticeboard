@@ -1,9 +1,10 @@
 import React, {Component, Fragment} from 'react';
-import TextInput from '../../common/form/Input';
-import Textarea from '../../common/form/Textarea';
-import SelectInput from '../../common/form/Select'
+import TextInput from '../common/form/Input';
+import Textarea from '../common/form/Textarea';
+import SelectInput from '../common/form/Select';
+import Checkbox from '../common/form/Checkbox';
 import {connect} from 'react-redux';
-import {addPost} from '../../../Redux/actions/posts';
+import {addPost} from '../../Redux/actions/posts';
 import {bindActionCreators} from 'redux';
 import {Link} from "react-router-dom";
 
@@ -17,7 +18,8 @@ class PostForm extends Component {
                 title: '',
                 description: '',
                 category: '',
-                department: ''
+                department: '',
+                send_mail: ''
             },
             isAdmin: false
         };
@@ -126,7 +128,7 @@ class PostForm extends Component {
     }
 
     render() {
-        const {post: {title, description, category, department}, errors, isAdmin} = this.state;
+        const {post: {title, description, category, department, send_mail}, errors, isAdmin} = this.state;
         const {departments} = this.props;
         const categoryOptions = [
             {
@@ -183,6 +185,12 @@ class PostForm extends Component {
                               label="Post Description"
                               value={description}
                               error={errors.description}
+                              onChange={this.handleChange}/>
+
+                    <Checkbox name="send_mail"
+                              label="Send Email Notification for this post"
+                              value={send_mail}
+                              error={errors.send_mail}
                               onChange={this.handleChange}/>
 
                     <button type="submit" className="btn btn-primary">Submit</button>

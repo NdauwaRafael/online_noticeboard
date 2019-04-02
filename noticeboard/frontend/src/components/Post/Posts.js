@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllPosts, deletePost } from '../../../Redux/actions/posts/index';
+import { getAllPosts, deletePost } from '../../Redux/actions/posts';
 import PostsTable from './partials/PostsTable'
 class Posts extends Component {
     constructor(props) {

@@ -3,13 +3,13 @@ import { Route, Switch } from 'react-router-dom';
 
 //ROUTES
 import Dashboard from '../components/Board/Dashboard';
-import AddPost from '../components/Board/Post/Form'
+import AddPost from '../components/Post/Form'
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
 
 //POSTS
-import PublicPosts from '../components/Board/Post/Posts';
-import DepartmentalPosts from '../components/Board/Post/DepartmentalPosts';
+import PublicPosts from '../components/Post/Posts';
+import DepartmentalPosts from '../components/Post/DepartmentalPosts';
 
 //USERS
 import AddUser from '../components/users/AddUser';
