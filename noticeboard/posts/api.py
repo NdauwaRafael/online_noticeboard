@@ -26,15 +26,16 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
         if self.request.data['send_mail'] == 'send_mail':
-            with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
-                post_email_message = msg.read()
+            # with open(settings.BASE_DIR + "/frontend/templates/emails/email.txt") as msg:
+            #     post_email_message = msg.read()
+            post_email_message = self.request.data['description']
             subject = 'POST: ' + self.request.data['title']
             to_email = (UserSerializer(self.request.user).data['email'],)
             from_email = 'ONAP: <no-reply@onlinenoticeboard.com>'
             message = EmailMultiAlternatives(subject=subject, body=post_email_message, from_email=from_email,
                                              to=to_email)
-            message_body = Context({'body': self.request.data['description'], 'title': self.request.data['title']})
-            html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render()
+            message_body = {'body': self.request.data['description'], 'title': self.request.data['title']}
+            html_template = get_template(settings.BASE_DIR + "/frontend/templates/emails/email.html").render(message_body)
             message.attach_alternative(html_template, "text/html")
             message.send()
 
