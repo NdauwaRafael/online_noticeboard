@@ -47,7 +47,7 @@ class UserAPI(generics.RetrieveAPIView):
 
 class UsersViewSet(viewsets.ModelViewSet):
     serializer_class = RegisterSerializer
-    permission_classes = [UserIsAdministrator]
+    # permission_classes = [UserIsAdministrator]
 
     def get_queryset(self):
         return get_user_model().objects.all()
