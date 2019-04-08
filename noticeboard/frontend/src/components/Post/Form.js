@@ -233,11 +233,14 @@ const mapStateToProps = ({posts: {errors}, posts, auth: {user}, departments: {de
     if (postId && posts.posts.length > 0) {
         postDetails = getPostById(posts.posts, postId);
     }
+
+    let userDepartments = departments.filter(department => parseInt(department.hod_id) === parseInt(user.id));
+
     return {
         errors,
         posts,
         user,
-        departments: departmentFormattedForDropdown(departments),
+        departments: departmentFormattedForDropdown(userDepartments),
         postDetails,
         loading
     }
