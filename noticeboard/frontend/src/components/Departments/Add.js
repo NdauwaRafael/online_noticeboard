@@ -93,8 +93,8 @@ const getDepartmentByID = (departments, id) => {
     }
     return null;
 };
-const usersFormattedForDropdown = (users) => {
-    let hodUsers = users.filter(user=>user.role==='HOD');
+const usersFormattedForDropdown = (users, id) => {
+    let hodUsers = users.filter(user=>user.role==='HOD' && parseInt(user.department_id) === parseInt(id)  );
     return hodUsers.map(user => {
         return {
             value: user.id,
@@ -113,7 +113,7 @@ function mapStateToProps({departments: {departments, addDepartmentErrors}, users
         departments,
         addDepartmentErrors,
         departmentDetails,
-        userList: usersFormattedForDropdown(users)
+        userList: usersFormattedForDropdown(users, deptId)
     };
 };
 
